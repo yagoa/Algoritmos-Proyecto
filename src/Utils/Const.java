@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ucubooks;
+package Utils;
 
 /**
  *
  * @author yago
  */
-public class UcuBooks {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-       System.out.println("Compile!!");
+public class Const {
+    
+    public class Files
+    {
+        public static final String Books = "Libros.txt";
     }
     
+    public class CSV
+    {
+        public static final String Separator = "|";
+    }
 }
