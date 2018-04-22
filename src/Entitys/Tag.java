@@ -33,4 +33,8 @@ public class Tag extends UcuBooksBaseEntity {
      * Base class constructor.
      */
     public Tag(){}
+    
+    public Tag(int pId){
+        super(pId);
+    }
 }

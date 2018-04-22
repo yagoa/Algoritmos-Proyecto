@@ -18,74 +18,76 @@ public class Book extends UcuBooksBaseEntity {
     private int mCantPoints;
     private String mISBN;
 
+
+
     //PROPIEDADES
     /**
      * @return the mName
      */
-    public String getmName() {
+    public String getName() {
         return mName;
     }
 
     /**
      * @param mName the mName to set
      */
-    public void setmName(String mName) {
+    public void setName(String mName) {
         this.mName = mName;
     }
 
     /**
      * @return the mYear
      */
-    public short getmYear() {
+    public short getYear() {
         return mYear;
     }
 
     /**
      * @param mYear the mYear to set
      */
-    public void setmYear(short mYear) {
+    public void setYear(short mYear) {
         this.mYear = mYear;
     }
 
     /**
      * @return the mPoints
      */
-    public float getmPoints() {
+    public float getPoints() {
         return mPoints;
     }
 
     /**
      * @param mPoints the mPoints to set
      */
-    public void setmPoints(float mPoints) {
+    public void setPoints(float mPoints) {
         this.mPoints = mPoints;
     }
 
     /**
      * @return the mCantPoints
      */
-    public int getmCantPoints() {
+    public int getCantPoints() {
         return mCantPoints;
     }
 
     /**
      * @param mCantPoints the mCantPoints to set
      */
-    public void setmCantPoints(int mCantPoints) {
+    public void setCantPoints(int mCantPoints) {
         this.mCantPoints = mCantPoints;
     }
 
     /**
      * @return the mISBN
      */
-    public String getmISBN() {
+    public String getISBN() {
         return mISBN;
     }
 
     /**
      * @param mISBN the mISBN to set
      */
-    public void setmISBN(String mISBN) {
+    public void setISBN(String mISBN) {
         this.mISBN = mISBN;
     }
     
@@ -94,4 +96,8 @@ public class Book extends UcuBooksBaseEntity {
      * Base class constructor.
      */
     public Book(){}
+    
+    public Book(int pId){
+        super(pId);
+    }
 }
