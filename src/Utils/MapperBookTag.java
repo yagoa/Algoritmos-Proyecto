@@ -16,7 +16,7 @@ import Utils.Collections.Lists.INode;
 public class MapperBookTag implements IMapper {
 
     @Override
-    public Object SourceToEntity(IList<String> pPropertys) {
+    public BookTag SourceToEntity(IList<String> pPropertys) {
         
         BookTag lNewInstance = new BookTag(Integer.parseInt(pPropertys.getFirst().getData().toString()));
         

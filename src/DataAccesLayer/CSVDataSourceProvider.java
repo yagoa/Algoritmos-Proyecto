@@ -70,7 +70,7 @@ public class CSVDataSourceProvider<T> implements IDataSourceProvider {
             
             while ((lCurrentLine = lBuferReder.readLine()) != null){
 
-                int lPropertyPosition = 0;
+                int lPropertyPosition = 1;
                 IList<String> lPropertysString = new List<>();
 
                 for(String lProperty : lCurrentLine.split("\\"+this.mSeparator)){

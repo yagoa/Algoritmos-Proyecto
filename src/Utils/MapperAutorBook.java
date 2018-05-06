@@ -12,7 +12,7 @@ import Utils.Collections.Lists.INode;
 public class MapperAutorBook implements IMapper {
 
     @Override
-    public Object SourceToEntity(IList<String> pPropertys) {
+    public AutorBook SourceToEntity(IList<String> pPropertys) {
         
         AutorBook lNewInstance = new AutorBook(Integer.parseInt(pPropertys.getFirst().getData().toString()));
         
@@ -20,7 +20,7 @@ public class MapperAutorBook implements IMapper {
         
         lTempNode = pPropertys.search(2);
         if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
-            lNewInstance.setOtherID(Short.parseShort(pPropertys.search(2).getData().toString()));
+            lNewInstance.setOtherID(Integer.parseInt(pPropertys.search(2).getData().toString()));
         
         return lNewInstance;
     }   

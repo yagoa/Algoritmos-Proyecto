@@ -17,13 +17,11 @@ import Utils.Collections.Lists.INode;
 public class MapperAutor implements IMapper {
 
     @Override
-    public Object SourceToEntity(IList<String> pPropertys) {
+    public Autor SourceToEntity(IList<String> pPropertys) {
         
         Autor lNewInstance = new Autor(Integer.parseInt(pPropertys.getFirst().getData().toString()));
-        
-        INode<String> lTempNode = pPropertys.search(1);     
-        
-        lTempNode = pPropertys.search(2);
+              
+        INode<String> lTempNode = pPropertys.search(2);
         if(lTempNode!= null)
             lNewInstance.setName(pPropertys.search(2).getData().toString());
         

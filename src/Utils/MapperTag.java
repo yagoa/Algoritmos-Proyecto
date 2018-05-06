@@ -16,13 +16,12 @@ import Utils.Collections.Lists.INode;
 public class MapperTag implements IMapper {
 
     @Override
-    public Object SourceToEntity(IList<String> pPropertys) {
+    public Tag SourceToEntity(IList<String> pPropertys) {
         
         Tag lNewInstance = new Tag(Integer.parseInt(pPropertys.getFirst().getData().toString()));
         
-        INode<String> lTempNode = pPropertys.search(1);     
+        INode<String> lTempNode = pPropertys.search(2);     
         
-        lTempNode = pPropertys.search(2);
         if(lTempNode!= null)
             lNewInstance.setTagName(pPropertys.search(2).getData().toString());
         

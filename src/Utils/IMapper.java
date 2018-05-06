@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 package Utils;
+import Entitys.UcuBooksBaseEntity;
 import Utils.Collections.Lists.IList;
 
 
@@ -21,5 +22,5 @@ public interface IMapper {
      * @param pPropertys List of propertys
      * @return New ojecg entity.
      */
-    public Object SourceToEntity(IList<String> pPropertys);
+    public UcuBooksBaseEntity SourceToEntity(IList<String> pPropertys);
 }
