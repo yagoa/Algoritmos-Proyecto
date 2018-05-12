@@ -18,7 +18,7 @@ public interface IList<E> {
       * @param Pkey - key node for.
       * @return Node found. If not found, return null.
       */
-    public INode search(Comparable pKey);
+    public INode<E> search(Comparable pKey);
 
       /**
       * Method responsible for removing a node whose key is indicated.

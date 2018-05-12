@@ -5,6 +5,11 @@
  */
 package Entitys;
 
+import Utils.Collections.Lists.IList;
+import Utils.Collections.Lists.INode;
+import Utils.Collections.Lists.List;
+import Utils.Collections.Lists.Node;
+
 /**
  *
  * @author yago
@@ -17,7 +22,8 @@ public class Book extends UcuBooksBaseEntity {
     private float mPoints;
     private int mCantPoints;
     private String mISBN;
-
+    private IList<Autor> mAutors;
+    private IList<Tag> mTags;
 
 
     //PROPIEDADES
@@ -91,6 +97,22 @@ public class Book extends UcuBooksBaseEntity {
         this.mISBN = mISBN;
     }
     
+    public IList<Autor> getAutors() {
+        return mAutors;
+    }
+    
+    public void setAutors(IList<Autor> mAutors) {
+        this.mAutors = mAutors;
+    }
+
+    public IList<Tag> getTags() {
+        return mTags;
+    }
+
+    public void setTags(IList<Tag> mTags) {
+        this.mTags = mTags;
+    }
+    
     //CONSTRUCTORS
     /**
      * Base class constructor.
@@ -99,5 +121,38 @@ public class Book extends UcuBooksBaseEntity {
     
     public Book(int pId){
         super(pId);
+    }
+    
+    //METODOS
+    public void addAutor(Autor pAutor) throws NullPointerException
+    {
+        if(pAutor != null){
+            if(this.getAutors() == null){
+                this.mAutors = new List<Autor>();
+            }
+
+            if(this.mAutors.search(pAutor.getID()) == null){
+                INode lNewNode = new Node(pAutor, pAutor.getID());
+                this.mAutors.add(lNewNode);
+            }
+        }
+        else
+            throw new NullPointerException("Producers can't be null."); 
+    }
+    
+    public void addTag(Tag pTag) throws NullPointerException
+    {
+        if(pTag != null){
+            if(this.getTags() == null){
+                this.mTags = new List<Tag>();
+            }
+
+            if(this.mTags.search(pTag.getID()) == null){
+                INode lNewNode = new Node(pTag, pTag.getID());
+                this.mTags.add(lNewNode);
+            }
+        }
+        else
+            throw new NullPointerException("Producers can't be null."); 
     }
 }
