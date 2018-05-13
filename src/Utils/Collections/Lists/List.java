@@ -13,12 +13,16 @@ import Utils.Collections.LinkedListIterator;
 public class List<E> implements IList<E> {
 
     private INode<E> mFirst;
+    private INode<E> mLast;
+    private int mSise;
 
     /**
      * Base class constructor.
      */
     public List() {
         this.mFirst = null;
+        this.mLast = null;
+        this.mSise = 0;
     }
 
     /**
@@ -27,6 +31,8 @@ public class List<E> implements IList<E> {
      */
     public List(INode<E> pNode) {
         this.mFirst = pNode;
+        this.mLast = pNode;
+        this.mSise = 0;
     }
     
       /**
@@ -39,17 +45,13 @@ public class List<E> implements IList<E> {
 
         if (this.isEmpty()) {
             this.mFirst = pNewNode;
+            this.mLast = pNewNode;
         }
         else {
-
-            INode<E> lTemp = this.mFirst;
-
-            while (lTemp.getNext() != null) {
-                lTemp = lTemp.getNext();
-            }
-
-            lTemp.setNext(pNewNode);
+            this.mLast.setNext(pNewNode);
         }
+        
+        this.mSise++;
     }
       /**
       * Method charge of finding a node whose key is indicated.
@@ -90,6 +92,8 @@ public class List<E> implements IList<E> {
             if (mFirst.getLabel().equals(pKey)) 
             {
                 mFirst = null;
+                mLast = null;
+                this.mSise--;
                 return true;
             }
         }
@@ -100,14 +104,21 @@ public class List<E> implements IList<E> {
             INode<E> temp1 = aux;
             INode<E> temp = aux.getNext();
             mFirst = temp;
+            this.mSise--;
             return true;
         }
         while (aux.getNext()!= null) 
         {
             if (aux.getNext().getLabel().equals(pKey)) 
             {
+                if(mLast.getLabel().equals(pKey))
+                {
+                    mLast = aux;
+                }
+                
                 INode<E> temp = aux.getNext();
                 aux.setNext(temp.getNext());
+                this.mSise--;
                 return true;
             }
             aux = aux.getNext();
@@ -167,17 +178,7 @@ public class List<E> implements IList<E> {
       */
     @Override
     public int size() {
-        int count = 0;
-        if (!isEmpty()) 
-        {
-            INode aux = mFirst;
-            while (aux != null) 
-            {
-                count++;
-                aux = aux.getNext();
-            }
-        }      
-        return count;
+        return this.mSise;
     }
     
      /**
@@ -187,7 +188,7 @@ public class List<E> implements IList<E> {
       */
     @Override
     public boolean isEmpty() {
-        return this.mFirst == null;
+        return this.mFirst == null && this.mLast == null;
     }
     
       /**

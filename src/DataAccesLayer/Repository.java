@@ -65,5 +65,5 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
         return result;
     } 
        
-    protected abstract void CSVDataSource();
+    abstract void CSVDataSource();
 }

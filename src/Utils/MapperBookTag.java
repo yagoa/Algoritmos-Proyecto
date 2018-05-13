@@ -24,7 +24,7 @@ public class MapperBookTag implements IMapper {
         
         lTempNode = pPropertys.search(2);
         if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
-            lNewInstance.setOtherID(Short.parseShort(pPropertys.search(2).getData().toString()));
+            lNewInstance.setOtherID(Integer.parseInt(pPropertys.search(2).getData().toString()));
         
         return lNewInstance;
     }   

@@ -64,7 +64,8 @@ public class CSVDataSourceProvider<T> implements IDataSourceProvider {
             throw new NullPointerException("Separator can't be null or empty.");
         
         BufferedReader lBuferReder = this.readCSVFile();
-  
+        try
+        {
         if(lBuferReder != null){
             lObjectList = new List<>();
             
@@ -81,10 +82,15 @@ public class CSVDataSourceProvider<T> implements IDataSourceProvider {
 
                 Object lEntity  = this.mMapTo.SourceToEntity(lPropertysString);
                 if(lEntity!= null){
-                    Comparable lKey = Integer.parseInt(lPropertysString.getFirst().getData());
+                    Comparable lKey = Integer.parseInt(lPropertysString.getFirst().getData().replaceAll("\"", ""));
                     lObjectList.add(new Node(lEntity, lKey));
                 }
             }
+        }
+        }
+        catch(IOException | NumberFormatException  ex)
+        {
+            System.out.println(lObjectList.size());
         }
         return lObjectList;
     }

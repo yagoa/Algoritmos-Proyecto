@@ -26,7 +26,7 @@ public class BookTagRepository extends Repository<BookTag> {
         
     @Override
     protected void CSVDataSource(){
-        this.mMapper = new MapperAutorBook();
+        this.mMapper = new MapperBookTag();
         this.mDataSource = new CSVDataSourceProvider(this.mMapper, Const.CSV.Separator ,Const.Files.BookTags);
     }
 }
