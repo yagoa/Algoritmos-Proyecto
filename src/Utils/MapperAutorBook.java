@@ -14,17 +14,19 @@ public class MapperAutorBook implements IMapper {
     @Override
     public AutorBook SourceToEntity(IList<String> pPropertys) {
         
-        if(pPropertys.getFirst().getData() == ""){
-            return null;
-        }
-        
-        AutorBook lNewInstance = new AutorBook(Integer.parseInt(pPropertys.getFirst().getData().toString()));
-        
         INode<String> lTempNode;  
+        AutorBook lNewInstance = null;
         
+        lTempNode = pPropertys.search(1);
+        
+        if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
+            lNewInstance = new AutorBook(Integer.parseInt(lTempNode.getData()));
+        else
+            return lNewInstance;
+   
         lTempNode = pPropertys.search(2);
         if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
-            lNewInstance.setOtherID(Integer.parseInt(pPropertys.search(2).getData().toString()));
+            lNewInstance.setOtherID(Integer.parseInt(lTempNode.getData().toString()));
         
         return lNewInstance;
     }   

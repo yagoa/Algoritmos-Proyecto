@@ -17,27 +17,34 @@ public class MapperBook implements IMapper {
 
     @Override
     public Book SourceToEntity(IList<String> pPropertys) {
-        Book lNewInstance = new Book(Integer.parseInt(pPropertys.getFirst().getData().toString()));
+        INode<String> lTempNode;  
+        Book lNewInstance = null; 
+        
+        lTempNode = pPropertys.search(1);
+        if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
+            lNewInstance = new Book(Integer.parseInt(lTempNode.getData()));
+        else
+            return lNewInstance;
              
-        INode<String> lTempNode = pPropertys.search(2);
+        lTempNode = pPropertys.search(2);
         if(lTempNode!= null)
-            lNewInstance.setName(pPropertys.search(2).getData().toString());
+            lNewInstance.setName(lTempNode.getData().toString());
         
         lTempNode = pPropertys.search(3);
         if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
-            lNewInstance.setYear(Short.parseShort(pPropertys.search(3).getData().toString()));
+            lNewInstance.setYear(Short.parseShort(lTempNode.getData().toString()));
         
         lTempNode = pPropertys.search(4);
         if(lTempNode!= null && Extensions.isFloat(lTempNode.getData()))
-            lNewInstance.setPoints(Float.parseFloat(pPropertys.search(4).getData().toString()));
+            lNewInstance.setPoints(Float.parseFloat(lTempNode.getData().toString()));
         
         lTempNode = pPropertys.search(5);
         if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
-            lNewInstance.setCantPoints(Integer.parseInt(pPropertys.search(5).getData().toString()));
+            lNewInstance.setCantPoints(Integer.parseInt(lTempNode.getData().toString()));
         
         lTempNode = pPropertys.search(6);
         if(lTempNode!= null)
-            lNewInstance.setISBN(pPropertys.search(6).getData().toString());
+            lNewInstance.setISBN(lTempNode.getData().toString());
         
         return lNewInstance;
     }

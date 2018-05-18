@@ -42,12 +42,11 @@ public class Library {
     
     public void Init() throws IOException
     {
+        this.TagsRepo.loadAll();
+        this.BooksRepo.loadAll();
         this.AutorBooksRepo.loadAll();
         this.BookTagsRepo.loadAll();
-        this.TagsRepo.loadAll();
         this.AutorsRepo.loadAll();
-
-        this.BookTagsRepo.loadAll();
         
         this.ReleateTagsToBooks();
         this.ReleateAutorsToBooks();
@@ -59,9 +58,9 @@ public class Library {
         IList tags = this.TagsRepo.getAll();
         IList realations = this.BookTagsRepo.getAll();
         
-        if((books != null && books.isEmpty()) ||  
-           (tags != null && tags.isEmpty()) ||  
-           (realations != null && realations.isEmpty()))       
+        if((books != null && !books.isEmpty()) ||  
+           (tags != null && !tags.isEmpty()) ||  
+           (realations != null && !realations.isEmpty()))       
         {
              IIterable<OneToMany> iterator = realations.iterator();
              
@@ -72,8 +71,11 @@ public class Library {
                 INode<Book> bookNode = books.search(bookTag.getID());
                 INode<Tag> tagNode = tags.search(bookTag.getOtherID());
                 
-                Book book = bookNode.getData();
-                book.addTag(tagNode.getData());
+                if(bookNode != null && tagNode!=null)
+                {
+                    Book book = bookNode.getData();
+                    book.addTag(tagNode.getData());
+                }
              }
         }
     } 

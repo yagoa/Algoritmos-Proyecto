@@ -17,13 +17,19 @@ public class MapperTag implements IMapper {
 
     @Override
     public Tag SourceToEntity(IList<String> pPropertys) {
-               
-        Tag lNewInstance = new Tag(Integer.parseInt(pPropertys.getFirst().getData().toString().replaceAll("\"", "")));
+             
+        INode<String> lTempNode;  
+        Tag lNewInstance = null; 
         
-        INode<String> lTempNode = pPropertys.search(2);     
-        
+        lTempNode = pPropertys.search(1);
+        if(lTempNode!= null && Extensions.isInteger(lTempNode.getData().replace("\"", "")))
+            lNewInstance = new Tag(Integer.parseInt(lTempNode.getData().replace("\"", "")));
+        else
+            return lNewInstance;
+            
+        lTempNode = pPropertys.search(2);     
         if(lTempNode!= null)
-            lNewInstance.setTagName(pPropertys.getFirst().getData().toString().replaceAll("\"", ""));
+            lNewInstance.setTagName(lTempNode.getData().replace("\"", ""));
         
         return lNewInstance;
     }

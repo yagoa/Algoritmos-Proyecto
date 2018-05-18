@@ -18,13 +18,18 @@ public class MapperBookTag implements IMapper {
     @Override
     public BookTag SourceToEntity(IList<String> pPropertys) {
         
-        BookTag lNewInstance = new BookTag(Integer.parseInt(pPropertys.getFirst().getData().toString()));
-        
         INode<String> lTempNode;  
+        BookTag lNewInstance = null;
         
+        lTempNode = pPropertys.search(1);
+        if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
+            lNewInstance = new BookTag(Integer.parseInt(lTempNode.getData()));
+        else
+            return lNewInstance;
+   
         lTempNode = pPropertys.search(2);
         if(lTempNode!= null && Extensions.isInteger(lTempNode.getData()))
-            lNewInstance.setOtherID(Integer.parseInt(pPropertys.search(2).getData().toString()));
+            lNewInstance.setOtherID(Integer.parseInt(lTempNode.getData().toString()));
         
         return lNewInstance;
     }   

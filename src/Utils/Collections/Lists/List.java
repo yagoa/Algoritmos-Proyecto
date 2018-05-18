@@ -48,7 +48,9 @@ public class List<E> implements IList<E> {
             this.mLast = pNewNode;
         }
         else {
-            this.mLast.setNext(pNewNode);
+            INode<E> currentLast = this.mLast;
+            currentLast.setNext(pNewNode);
+            this.mLast = pNewNode;
         }
         
         this.mSise++;
