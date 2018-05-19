@@ -67,6 +67,8 @@ public interface IList<E> {
       */
     public INode<E> getFirst();
     
+    public INode<E> getLast();
+    
     
     /** 
      * Returns an iterator for the list.

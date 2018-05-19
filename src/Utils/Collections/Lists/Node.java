@@ -12,6 +12,7 @@ public class Node<T> implements INode<T> {
     private final Comparable mLabel;
     private T mData;
     private INode<T> mNext = null;
+    private INode<T> mPrev = null;
 
     
     /**
@@ -62,17 +63,31 @@ public class Node<T> implements INode<T> {
         this.mNext = pNode;
 
     }
+    
+    @Override
+    public void setPrev(INode<T> pNode) {
+        this.mPrev = pNode;
+
+    }
     /**
       * Returns the next node to the current node.
       * @return Next node of the current
-      */
+     
+     * @return  */
     @Override
     public INode<T> getNext() {
         return this.mNext;
     }
+    
+    @Override
+    public INode<T> getPrev() {
+       return this.mPrev;
+    }
+    
     /**
      * Print data node
-     */
+    
+     * @return  */
     @Override
     public String print() {
         return mData.toString();
@@ -80,7 +95,8 @@ public class Node<T> implements INode<T> {
 
     /**
      * Prints node label
-     */
+    
+     * @return  */
     @Override
     public String printLabel() {
         return this.mLabel.toString();

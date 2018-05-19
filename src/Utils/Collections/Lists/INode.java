@@ -2,7 +2,7 @@ package Utils.Collections.Lists;
 
 public interface INode<E> {
 
-      /**
+    /**
       * Returns the data contained in the node.
       *
       * @return Data contained in the node.
@@ -20,12 +20,17 @@ public interface INode<E> {
      * @param pNode Node to assign as follows. 
      */
     public void setNext(INode<E> pNode);
+    
+    public void setPrev(INode<E> pNode);
+    
 
     /**
       * Returns the next node to the current node.
       * @return Next node of the current
       */
     public INode<E> getNext();
+    
+    public INode<E> getPrev();
 
     /**
      * Print data node

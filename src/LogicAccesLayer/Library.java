@@ -48,8 +48,8 @@ public class Library {
         this.BookTagsRepo.loadAll();
         this.AutorsRepo.loadAll();
         
-        this.ReleateTagsToBooks();
         this.ReleateAutorsToBooks();
+        this.ReleateTagsToBooks();
     }
     
     private void ReleateTagsToBooks()
@@ -86,9 +86,9 @@ public class Library {
         IList autors = this.AutorsRepo.getAll();
         IList realations = this.AutorBooksRepo.getAll();
         
-        if((books != null && books.isEmpty()) ||  
-           (autors != null && autors.isEmpty()) ||  
-           (realations != null && realations.isEmpty()))       
+        if((books != null && !books.isEmpty()) ||  
+           (autors != null && !autors.isEmpty()) ||  
+           (realations != null && !realations.isEmpty()))       
         {
              IIterable<OneToMany> iterator = realations.iterator();
              
@@ -99,8 +99,11 @@ public class Library {
                 INode<Book>  bookNode = books.search(bookAutor.getID());
                 INode<Autor> autorNode = autors.search(bookAutor.getOtherID());
                 
-                Book book = bookNode.getData();
-                book.addAutor(autorNode.getData());
+                if(bookNode != null && autorNode!=null)
+                {
+                    Book book = bookNode.getData();
+                    book.addAutor(autorNode.getData());
+                }
              }
         }
     }

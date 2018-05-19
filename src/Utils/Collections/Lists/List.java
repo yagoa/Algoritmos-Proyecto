@@ -13,15 +13,14 @@ import Utils.Collections.LinkedListIterator;
 public class List<E> implements IList<E> {
 
     private INode<E> mFirst;
-    private INode<E> mLast;
+    private INode<E> mTail;
     private int mSise;
 
     /**
-     * Base class constructor.
      */
     public List() {
         this.mFirst = null;
-        this.mLast = null;
+        this.mTail = null;
         this.mSise = 0;
     }
 
@@ -31,7 +30,7 @@ public class List<E> implements IList<E> {
      */
     public List(INode<E> pNode) {
         this.mFirst = pNode;
-        this.mLast = pNode;
+        this.mTail = pNode;
         this.mSise = 0;
     }
     
@@ -42,17 +41,15 @@ public class List<E> implements IList<E> {
       */
     @Override
     public void add(INode<E> pNewNode) {
-
         if (this.isEmpty()) {
             this.mFirst = pNewNode;
-            this.mLast = pNewNode;
+            this.mTail = pNewNode;
         }
         else {
-            INode<E> currentLast = this.mLast;
-            currentLast.setNext(pNewNode);
-            this.mLast = pNewNode;
-        }
-        
+            pNewNode.setPrev(this.mTail);
+            this.mTail.setNext(pNewNode);
+            this.mTail = pNewNode;
+        }    
         this.mSise++;
     }
       /**
@@ -64,20 +61,36 @@ public class List<E> implements IList<E> {
     @Override
     public INode<E> search(Comparable key) 
     {
-        INode<E> result = null;      
-        if (!isEmpty()) 
-        {
-            INode<E> aux = mFirst;
-            while (aux != null)
-            {
-                if (aux.getLabel().equals(key)) 
-                {
-                    return aux;
-                }
-                aux = aux.getNext();
+        if (isEmpty()){ return null;}
+        
+        INode<E> lFromTail = this.mTail;
+        INode<E> lFromFirst = this.mFirst;
+        INode<E> result = null; 
+     
+        if(lFromTail.getLabel().equals(key)){
+            return lFromTail;
+        }
+        if(lFromFirst.getLabel().equals(key)){
+            return lFromFirst;
+        }
+        
+        int index = 1;
+        int halfListElements = (this.mSise / 2) + 1;
+       
+        while(index < halfListElements){
+            lFromTail = this.iterateBackward(lFromTail);
+            lFromFirst = this.iterateForward(lFromFirst);
+            
+            if(lFromTail.getLabel().equals(key)){
+                return lFromTail;
             }
+            if(lFromFirst.getLabel().equals(key)){
+                return lFromFirst;
+            }
+            
+            index++;
         }     
-        return result;
+        return null;    
     }
       /**
       * Method responsible for removing a node whose key is indicated.
@@ -89,43 +102,20 @@ public class List<E> implements IList<E> {
     public boolean delete(Comparable pKey) {
         if (isEmpty())  return false;
         
-        if (mFirst.getNext() == null) 
-        {
-            if (mFirst.getLabel().equals(pKey)) 
-            {
-                mFirst = null;
-                mLast = null;
-                this.mSise--;
-                return true;
-            }
-        }
-        INode<E> aux = mFirst;
-        if (aux.getLabel().compareTo(pKey) == 0) 
-        {
-            //Eliminamos el primer elemento
-            INode<E> temp1 = aux;
-            INode<E> temp = aux.getNext();
-            mFirst = temp;
-            this.mSise--;
-            return true;
-        }
-        while (aux.getNext()!= null) 
-        {
-            if (aux.getNext().getLabel().equals(pKey)) 
-            {
-                if(mLast.getLabel().equals(pKey))
-                {
-                    mLast = aux;
-                }
-                
-                INode<E> temp = aux.getNext();
-                aux.setNext(temp.getNext());
-                this.mSise--;
-                return true;
-            }
-            aux = aux.getNext();
-        }
-        return false;
+        INode<E> lToRemove = this.search(pKey);   
+        
+        if(lToRemove == null) {return false;}
+        
+        INode<E> lToRemovePrev = lToRemove.getPrev();
+        INode<E> lToRemoveNext = lToRemove.getNext();
+        
+        lToRemovePrev.setNext(lToRemove.getNext());
+        lToRemoveNext.setPrev(lToRemove.getPrev());
+        
+        lToRemove.setNext(null);
+        lToRemove.setPrev(null);
+        
+        return true;
     }
     
     /**
@@ -190,7 +180,7 @@ public class List<E> implements IList<E> {
       */
     @Override
     public boolean isEmpty() {
-        return this.mFirst == null && this.mLast == null;
+        return this.mFirst == null && this.mTail == null;
     }
     
       /**
@@ -201,6 +191,11 @@ public class List<E> implements IList<E> {
     @Override
     public INode<E> getFirst() {
         return this.mFirst;
+    }   
+    
+    @Override
+    public INode<E> getLast() {
+        return this.mTail;
     }
     
     /** 
@@ -223,5 +218,15 @@ public class List<E> implements IList<E> {
             lSB.append(", ");
         }
         return lSB.toString();
+    }
+    
+    private INode<E> iterateBackward(INode<E> pNode)
+    {
+        return pNode.getPrev();
+    }
+    
+    private INode<E> iterateForward(INode<E> pNode)
+    {
+        return pNode.getNext();
     }
 }
