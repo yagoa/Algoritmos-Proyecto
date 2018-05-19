@@ -7,6 +7,7 @@ package ucubooks;
 
 import Entitys.Book;
 import LogicAccesLayer.Library;
+import LogicAccesLayer.Search;
 import Utils.Collections.Lists.IList;
 import static Utils.Const.Files.Books;
 import java.io.IOException;
@@ -29,10 +30,11 @@ public class UcuBooks {
             Library liv = new Library();
             liv.Init();
             
-            IList<Book> books = liv.getBooks();
+            Search lSearcher = liv.GetSearcher();
             
+            IList<Book> lLastEditions = lSearcher.FindLastEditions((short)2012);
             
-            
+                    
             System.out.println("Compile!!");
         } catch (IOException ex) {
             Logger.getLogger(UcuBooks.class.getName()).log(Level.SEVERE, null, ex);

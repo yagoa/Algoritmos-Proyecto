@@ -63,9 +63,10 @@ public class List<E> implements IList<E> {
     {
         if (isEmpty()){ return null;}
         
+        if (isEmpty()){ return null;}
+        
         INode<E> lFromTail = this.mTail;
         INode<E> lFromFirst = this.mFirst;
-        INode<E> result = null; 
      
         if(lFromTail.getLabel().equals(key)){
             return lFromTail;
@@ -74,23 +75,25 @@ public class List<E> implements IList<E> {
             return lFromFirst;
         }
         
-        int index = 1;
-        int halfListElements = (this.mSise / 2) + 1;
+        Boolean searcheEnd = false;
        
-        while(index < halfListElements){
+        while(!searcheEnd){
             lFromTail = this.iterateBackward(lFromTail);
             lFromFirst = this.iterateForward(lFromFirst);
-            
-            if(lFromTail.getLabel().equals(key)){
-                return lFromTail;
+             
+            if((lFromTail == null && lFromFirst == null) || (lFromTail.getLabel().equals(lFromFirst.getLabel()))){
+                searcheEnd = true;
             }
-            if(lFromFirst.getLabel().equals(key)){
-                return lFromFirst;
-            }
-            
-            index++;
+            else{
+                if(lFromTail != null && lFromTail.getLabel().equals(key)){
+                    return lFromTail;
+                }
+                if(lFromFirst != null && lFromFirst.getLabel().equals(key)){
+                    return lFromFirst;
+                }
+            }  
         }     
-        return null;    
+        return null;   
     }
       /**
       * Method responsible for removing a node whose key is indicated.
@@ -220,12 +223,12 @@ public class List<E> implements IList<E> {
         return lSB.toString();
     }
     
-    private INode<E> iterateBackward(INode<E> pNode)
+    public INode<E> iterateBackward(INode<E> pNode)
     {
         return pNode.getPrev();
     }
     
-    private INode<E> iterateForward(INode<E> pNode)
+    public INode<E> iterateForward(INode<E> pNode)
     {
         return pNode.getNext();
     }

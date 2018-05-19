@@ -69,7 +69,9 @@ public interface IList<E> {
     
     public INode<E> getLast();
     
+    public INode<E> iterateForward(INode<E> pNode);
     
+    public INode<E> iterateBackward(INode<E> pNode);
     /** 
      * Returns an iterator for the list.
      * @return Iterable instance. 

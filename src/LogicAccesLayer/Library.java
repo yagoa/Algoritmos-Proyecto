@@ -91,9 +91,8 @@ public class Library {
            (realations != null && !realations.isEmpty()))       
         {
              IIterable<OneToMany> iterator = realations.iterator();
-             
              while(iterator.hasNext())
-             {
+             {       
                 OneToMany bookAutor = iterator.next();
                  
                 INode<Book>  bookNode = books.search(bookAutor.getID());
@@ -106,6 +105,11 @@ public class Library {
                 }
              }
         }
+    }
+    
+    public Search GetSearcher()
+    {
+        return this.Searcher;
     }
     
     public IList<Book> getBooks()

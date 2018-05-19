@@ -155,4 +155,9 @@ public class Book extends UcuBooksBaseEntity {
         else
             throw new NullPointerException("Producers can't be null."); 
     }
+    
+    @Override
+    public String toString() {
+        return this.mName+"/"+ this.mYear;
+    }
 }
