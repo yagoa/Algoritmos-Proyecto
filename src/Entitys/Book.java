@@ -158,6 +158,6 @@ public class Book extends UcuBooksBaseEntity {
     
     @Override
     public String toString() {
-        return this.mName+"/"+ this.mYear;
+        return this.mName+" Year:"+ this.mYear+" ISBN: " + this.mISBN;
     }
 }

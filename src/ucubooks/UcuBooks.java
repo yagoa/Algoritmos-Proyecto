@@ -31,11 +31,18 @@ public class UcuBooks {
             liv.Init();
             
             Search lSearcher = liv.GetSearcher();
+            IList<Book> lLastEditions = null;
             
-            IList<Book> lLastEditions = lSearcher.FindLastEditions((short)2012);
-            
-                    
-            System.out.println("Compile!!");
+            //lLastEditions = lSearcher.BooksByYear((short)1937);   
+            lLastEditions = lSearcher.BooksByAutor("Harper Lee");      
+            //lLastEditions = lSearcher.BooksByTag("-fiction"); 
+            //lLastEditions = lSearcher.BookByNameAndYear("Gone Girl",(short)2012); 
+           
+            liv.RemoveAutor("Harper Lee");
+            System.out.println("ver!!");
+            lLastEditions = lSearcher.BooksByAutor("Harper Lee");  
+            //lLastEditions = lSearcher.BookByAutorAndISBN("Harper Lee","345368584"); 
+            System.out.println("End!!");
         } catch (IOException ex) {
             Logger.getLogger(UcuBooks.class.getName()).log(Level.SEVERE, null, ex);
         }

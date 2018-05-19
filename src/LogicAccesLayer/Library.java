@@ -52,6 +52,42 @@ public class Library {
         this.ReleateTagsToBooks();
     }
     
+    public Search GetSearcher()
+    {
+        return this.Searcher;
+    }
+    
+    public IList<Book> getBooks()
+    {
+        return this.BooksRepo.getAll();
+    }
+    
+    public Boolean RemoveAutor(String pAutorName){
+        if(pAutorName == null || pAutorName == ""){return null;}
+        
+        IList<Book> lSource = BooksRepo.getAll();
+        if (lSource.isEmpty()){ return false;}
+        
+        IList<Book> lAutorBooks = this.Searcher.BooksByAutor(pAutorName);
+        IList<Book> lBooksToDelete = new List<Book>();
+        
+        for(INode lNode = lAutorBooks.getFirst(); lNode != null; lNode = lNode.getNext()){
+
+            Book lBook = (Book)lNode.getData();
+            
+//            if(lBook.getAutors().size() == 1){
+               lBooksToDelete.add(lNode);
+//            }
+        }
+        
+        for(INode lNode = lBooksToDelete.getFirst(); lNode != null; lNode = lNode.getNext()){
+            lSource.delete(lNode.getLabel());
+        }
+        
+        return true;
+    }
+    
+    
     private void ReleateTagsToBooks()
     {
         IList books = this.BooksRepo.getAll();
@@ -107,13 +143,5 @@ public class Library {
         }
     }
     
-    public Search GetSearcher()
-    {
-        return this.Searcher;
-    }
-    
-    public IList<Book> getBooks()
-    {
-        return this.BooksRepo.getAll();
-    }
+
 }
