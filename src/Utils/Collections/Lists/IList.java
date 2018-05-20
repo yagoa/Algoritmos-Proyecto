@@ -1,8 +1,5 @@
 package Utils.Collections.Lists;
 
-import Utils.Collections.IIterable;
-
-
 public interface IList<E> {
 
       /**
@@ -72,13 +69,7 @@ public interface IList<E> {
     public INode<E> iterateForward(INode<E> pNode);
     
     public INode<E> iterateBackward(INode<E> pNode);
-    /** 
-     * Returns an iterator for the list.
-     * @return Iterable instance. 
-     */
-    public IIterable<E> iterator();
-    
-    
+
     @Override
     public  String toString();
     

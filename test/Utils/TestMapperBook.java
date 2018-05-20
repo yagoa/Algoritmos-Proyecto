@@ -33,9 +33,6 @@ public class TestMapperBook {
         mPropertysString = new List<>();
     }
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVMoviesTest in a normal case.
-     */
     @Test
     public void testSourceToEntity() {
     	mPropertysString.add(new Node<>("1", 1));   
@@ -59,28 +56,24 @@ public class TestMapperBook {
         assertEquals("1222-443-555", mBook.getISBN());
     }
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVMoviesTest withe a null parameter case.
-     */
     @Test(expected = NullPointerException.class)
     public void testSourceToEntityNullParameter() {
         mBook = mMapper.SourceToEntity(null);
         assertNull(mBook);
     }
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVMoviesTest withe a wrong  parameter order case.
-     */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSourceToEntityBadParameterFormat() {
     	
         mPropertysString.add(new Node<>("Una mago niño", 3)); 
         mPropertysString.add(new Node<>("2007", 6)); 
-        mPropertysString.add(new Node<>("1", 1));   
+        mPropertysString.add(new Node<>("id", 1));   
         mPropertysString.add(new Node<>("Harry Poter", 2)); 
         mPropertysString.add(new Node<>("Ciencia Ficcion", 5)); 
         mPropertysString.add(new Node<>("3.2", 4));
 
         mBook = mMapper.SourceToEntity(mPropertysString);
+        
+        assertNull(mBook);
     }
 }

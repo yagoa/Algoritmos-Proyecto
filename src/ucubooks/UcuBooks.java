@@ -38,9 +38,9 @@ public class UcuBooks {
             //lLastEditions = lSearcher.BooksByTag("-fiction"); 
             //lLastEditions = lSearcher.BookByNameAndYear("Gone Girl",(short)2012); 
            
-            liv.RemoveAutor("Harper Lee");
+            //liv.RemoveAutor("Harper Lee");
             System.out.println("ver!!");
-            lLastEditions = lSearcher.BooksByAutor("Harper Lee");  
+            //lLastEditions = lSearcher.BooksByAutor("Harper Lee");  
             //lLastEditions = lSearcher.BookByAutorAndISBN("Harper Lee","345368584"); 
             System.out.println("End!!");
         } catch (IOException ex) {

@@ -5,13 +5,12 @@
  */
 package DataAccesLayer;
 
-import Entitys.Autor;
-import Utils.Collections.Lists.IList;
+import Entitys.BookTag;
+import Utils.Collections.Lists.*;
 import Utils.SourceType;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,14 +18,13 @@ import static org.junit.Assert.*;
  *
  * @author yago
  */
-public class TestAutorRepository {
+public class TestBookTagRepository {
     
-    AutorRepository mRepository;
-       
-    
+    BookTagRepository mRepository;
+        
     @Before
     public void setUp() {
-        mRepository = new AutorRepository(SourceType.CSV);
+        mRepository = new BookTagRepository(SourceType.CSV);
     }
     
     @After
@@ -37,37 +35,43 @@ public class TestAutorRepository {
     @Test
     public void testLoadAll() throws IOException {        
         mRepository.loadAll();
-        IList<Autor> autors = mRepository.getAll();
-        assertNotNull(autors);
-        assertEquals(true, autors.size() > 0);
+        IList<BookTag> tags = mRepository.getAll();
+        assertNotNull(tags);
+        assertEquals(true, tags.size() > 0);
     }
 
     @Test(expected = NullPointerException.class)
     public void testLoadAll_NullPointerException() throws NullPointerException, IOException {
-        System.out.println("Test loadAllNullSurceType");
-        mRepository = new AutorRepository(null);         
+        mRepository = new BookTagRepository(null);         
         mRepository.loadAll();
-        IList<Autor> autors = mRepository.getAll();
+        IList<BookTag> tags = mRepository.getAll();
         fail("Fail Test loadAllNullSurceType");
     } 
     
     @Test()
     public void testGetById() throws NullPointerException, IOException {
         mRepository.loadAll();
-        Autor first = mRepository.getAll().getFirst().getData();
-        Autor search = mRepository.GetById(first.getID());
+        BookTag first = mRepository.getAll().getFirst().getData();
+        BookTag search = mRepository.GetById(first.getID());
         assertSame(search, first);
     } 
     
     @Test()
     public void testRemove() throws IOException {
         mRepository.loadAll();
-        Autor toRemove = mRepository.getAll().getFirst().getData();
+        BookTag toRemove = mRepository.getAll().getFirst().getData();
         Boolean result = mRepository.Remove(toRemove);
-        Autor stillExist = mRepository.GetById(toRemove.getID());
+        BookTag stillExist = mRepository.GetById(toRemove.getID());
         
+        // la diefencia es que el id principal puede estar repetido ya que el archivo no tiene id propio
         assertNotNull(toRemove);
         assertTrue(result);
-        assertNull(stillExist);
+        assertNotSame(stillExist, toRemove);
     } 
+
+   @Test(expected = NullPointerException.class)
+    public void testCSVDataSourceNullRepositoryInstance() {
+        BookTagRepository instance = null;
+        instance.CSVDataSource();
+    }  
 }

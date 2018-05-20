@@ -23,7 +23,6 @@ public class TestMapperAutor {
     public MapperAutor mMapper;
     IList<String> mPropertysString;
 
-
     public TestMapperAutor() {
     	mMapper = new MapperAutor();
     }
@@ -33,10 +32,6 @@ public class TestMapperAutor {
         mPropertysString = new List<String>();
     }
 
-
-     /**
-     * Test of SourceToEntity method, of class MapperCSVActorsTest in a normal case.
-     */
     @Test
     public void testSourceToEntity() {
     	System.out.println("Test SourceToEntity");
@@ -51,9 +46,6 @@ public class TestMapperAutor {
         assertEquals("Harper Lee", mAutor.getName());
     }
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVActorsTest withe a null parameter case.
-     */
     @Test(expected = NullPointerException.class)
     public void testSourceToEntityNullParameter() {
     	System.out.println("Test SourceToEntityNullParameter");
@@ -62,10 +54,7 @@ public class TestMapperAutor {
         fail("Fail Test SourceToEntityNullParameter");
     }
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVActorsTest withe a wrong  parameter order case.
-     */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSourceToEntityBadParameterFormat() {
     	System.out.println("Test SourceToEntityBadParameterFormat");
     	
@@ -73,7 +62,7 @@ public class TestMapperAutor {
     	mPropertysString.add(new Node<>("1", 0)); 
 
         mAutor = mMapper.SourceToEntity(mPropertysString);
-        fail("Fail Test SourceToEntityBadParameterFormat");
+        assertNull(mAutor);
     }
     
 }

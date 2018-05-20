@@ -22,9 +22,6 @@ public class TestCsvDataSourceProvider {
     
     public TestCsvDataSourceProvider() {}  
   
-    /**
-     * Test of getAll method, of class CSVDataSourceProvider in the normal case.
-     */
     @Test
     public void testGetAllNormal()  {
         lProvider = new CSVDataSourceProvider(new MapperAutor(), Const.CSV.Separator ,Const.Files.Authors);
@@ -41,9 +38,6 @@ public class TestCsvDataSourceProvider {
         assertEquals(true, result.size()>0);
     }
     
-     /**
-     * Test of getAll method, of class CSVDataSourceProvider in the bad path case throw a FileNotFoundException Exeption.
-     */
     @Test(expected = NullPointerException.class)
     public void testGetAllBadPath() throws IOException  {
         IList result = null;
@@ -52,15 +46,12 @@ public class TestCsvDataSourceProvider {
         fail("Test testGetAllBadPath");
     }
     
-     /**
-     * Test of getAll method, of class CSVDataSourceProvider in the bad separator case throw a IllegalArgumentException Exeption.
-     */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetAllBadSeparator()throws IOException {
         IList result = null;
         lProvider = new CSVDataSourceProvider(new MapperAutor(), "," ,Const.Files.Authors);    
-        result = lProvider.getAll();
-        fail("Test testGetAllBadSeparator");
+        result = lProvider.getAll(); 
+        assertEquals(result.size(),0);
     }
     
     @Test(expected = NullPointerException.class)
@@ -71,9 +62,6 @@ public class TestCsvDataSourceProvider {
         fail("Test testGetAllNullMapper");
     }
     
-     /**
-     * Test of getAll method, of class CSVDataSourceProvider withe all parameters null case, throw a NullPointerException Exeption.
-     */
     @Test(expected = NullPointerException.class)
     public void testGetAllNullParameters()throws IOException {
         IList result = null;
@@ -82,9 +70,6 @@ public class TestCsvDataSourceProvider {
         fail("Test testGetAllNullParameters");
     }
     
-     /**
-     * Test of getAll method, of class CSVDataSourceProvider withe a null separatero, throw a NullPointerException Exeption.
-     */
     @Test(expected = NullPointerException.class)
     public void testGetAllNullSeparator()throws IOException {
         IList result = null;
@@ -93,9 +78,6 @@ public class TestCsvDataSourceProvider {
         fail("Test testGetAllNullSeparator");
     }
     
-     /**
-     * Test of getAll method, of class CSVDataSourceProvider withe a null filePath, throw a NullPointerException Exeption.
-     */
     @Test(expected = NullPointerException.class)
     public void testGetAllNullFile()throws IOException {
         IList result = null;

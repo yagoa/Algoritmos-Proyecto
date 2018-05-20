@@ -7,7 +7,6 @@ package LogicAccesLayer;
 
 import DataAccesLayer.Repository;
 import Entitys.*;
-import Utils.Collections.IIterable;
 import Utils.Collections.Lists.*;
 
 /**
@@ -38,10 +37,9 @@ public class Search {
        
         IList lResult = new List<Book>();
         
-        IIterable<Book> lIterator = lSource.iterator();       
-        while(lIterator.hasNext()){
+        for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){       
             
-            Book lCurrent = lIterator.next();
+            Book lCurrent = lNode.getData();
             if(lCurrent.getYear() >= pYear){
                 
                 System.out.println(lCurrent.toString());
@@ -62,21 +60,17 @@ public class Search {
        
         IList lResult = new List<Book>();
         
-        IIterable<Book> lIteratorBooks = lSource.iterator();       
-        while(lIteratorBooks.hasNext()){
+        for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){ 
             
-            Book lCurrentBook = lIteratorBooks.next();
-            if(lCurrentBook.getAutors() != null && lCurrentBook.getAutors().size() > 0) {
+            Book lCurrentBook = lNode.getData();
+            if(lCurrentBook.getAutors() != null && lCurrentBook.getAutors().size() > 0) {           
+                IList<Autor> lAutors = lCurrentBook.getAutors();
                 
-                IIterable<Autor> lIteratorAutor = lCurrentBook.getAutors().iterator();
-                
-                while(lIteratorAutor.hasNext()){
-                    
-                    Autor lCurrentAutor = lIteratorAutor.next();
-                    if(lCurrentAutor.getName().toLowerCase().equals(pAutorName.toLowerCase())){
-                        
-                        System.out.println(lCurrentBook.toString());
-                        
+                for(INode<Autor> lNodeAutor = lAutors.getFirst(); lNodeAutor != null; lNodeAutor = lNodeAutor.getNext()){               
+                    Autor lCurrentAutor = lNodeAutor.getData();
+                   
+                    if(lCurrentAutor.getName().toLowerCase().equals(pAutorName.toLowerCase())){         
+                        System.out.println(lCurrentBook.toString());            
                         lResult.add(new Node<>(lCurrentBook,lCurrentBook.getID()));
                     }
                 }
@@ -93,19 +87,17 @@ public class Search {
        
         IList lResult = new List<Book>();
         
-        IIterable<Book> lIteratorBooks = lSource.iterator();       
-        while(lIteratorBooks.hasNext()){
+        for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){ 
             
-            Book lCurrentBook = lIteratorBooks.next();
+            Book lCurrentBook = lNode.getData();
             if(lCurrentBook.getTags() != null && lCurrentBook.getTags().size() > 0) {
                 
-                IIterable<Tag> lIteratorTag = lCurrentBook.getTags().iterator();
+                IList<Tag> lBookTags = lCurrentBook.getTags();
                 
-                while(lIteratorTag.hasNext()){
+                for(INode<Tag> lNodeTag = lBookTags.getFirst(); lNodeTag != null; lNodeTag = lNodeTag.getNext()){ 
                     
-                    Tag lCurrentTag = lIteratorTag.next();
-                    if(lCurrentTag.getTagName().toLowerCase().equals(pTag.toLowerCase())){
-                        
+                    Tag lCurrentTag = lNodeTag.getData();
+                    if(lCurrentTag.getTagName().toLowerCase().equals(pTag.toLowerCase())){            
                         System.out.println(lCurrentBook.toString());
                         
                         lResult.add(new Node<>(lCurrentBook,lCurrentBook.getID()));
@@ -122,12 +114,10 @@ public class Search {
         if (lSource.isEmpty()){ return null;}
        
         IList lResult = new List<Book>();
-        
-        IIterable<Book> lIterator = lSource.iterator();
-         
-        while(lIterator.hasNext()){
             
-            Book lCurrent = lIterator.next();
+        for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){
+            
+            Book lCurrent = lNode.getData();
 
             String lName = lCurrent.getName() == null ? "" : lCurrent.getName().toLowerCase();
             short lYear = lCurrent.getYear();
@@ -149,10 +139,9 @@ public class Search {
        
         IList lResult = new List<Book>();
         
-        IIterable<Book> lIterator = lSource.iterator();
-        while(lIterator.hasNext()){
+        for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){
             
-            Book lCurrentBook = lIterator.next();
+            Book lCurrentBook = lNode.getData();
             
             String lISBNBoth = lCurrentBook.getISBN() != null ? lCurrentBook.getISBN() : "/";
             String[] lISBN = lISBNBoth.split("/");

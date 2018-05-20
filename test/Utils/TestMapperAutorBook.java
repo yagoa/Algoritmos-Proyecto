@@ -34,9 +34,6 @@ public class TestMapperAutorBook {
     }
 
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVMoviesDirectors in a normal case.
-     */
     @Test
     public void testSourceToEntity() {
     	mPropertysString.add(new Node<>("1", 1));   
@@ -49,9 +46,7 @@ public class TestMapperAutorBook {
         assertEquals(2, mAutorBook.getOtherID());
     }
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVMoviesDirectors withe a null parameter case.
-     */
+    
     @Test(expected = NullPointerException.class)
     public void testSourceToEntityNullParameter() {
         mAutorBook = mMapper.SourceToEntity(null);

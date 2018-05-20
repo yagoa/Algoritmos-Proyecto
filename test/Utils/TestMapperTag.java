@@ -23,7 +23,6 @@ public class TestMapperTag {
     public MapperTag mMapper;
     IList<String> mPropertysString;
 
-
     public TestMapperTag() {
     	mMapper = new MapperTag();
     }
@@ -33,10 +32,6 @@ public class TestMapperTag {
         mPropertysString = new List<String>();
     }
 
-
-     /**
-     * Test of SourceToEntity method, of class MapperCSVActorsTest in a normal case.
-     */
     @Test
     public void testSourceToEntity() {
     	mPropertysString.add(new Node<>("1", 1));   
@@ -49,24 +44,20 @@ public class TestMapperTag {
         assertEquals("Accion", mTag.getTagName());
     }
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVActorsTest withe a null parameter case.
-     */
     @Test(expected = NullPointerException.class)
     public void testSourceToEntityNullParameter() {
         mTag = mMapper.SourceToEntity(null);
         assertNull(mTag);
     }
 
-     /**
-     * Test of SourceToEntity method, of class MapperCSVActorsTest withe a wrong  parameter order case.
-     */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSourceToEntityBadParameterFormat() {	
 	mPropertysString.add(new Node<>("Tom Cruise", 1)); 
     	mPropertysString.add(new Node<>("1", 0)); 
 
         mTag = mMapper.SourceToEntity(mPropertysString);
+        
+        assertNull(mTag);
     }
     
 }

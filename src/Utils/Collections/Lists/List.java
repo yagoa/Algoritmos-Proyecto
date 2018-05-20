@@ -1,7 +1,5 @@
 package Utils.Collections.Lists;
 
-import Utils.Collections.IIterable;
-import Utils.Collections.LinkedListIterator;
 
 
 /**
@@ -109,15 +107,25 @@ public class List<E> implements IList<E> {
         
         if(lToRemove == null) {return false;}
         
-        INode<E> lToRemovePrev = lToRemove.getPrev();
-        INode<E> lToRemoveNext = lToRemove.getNext();
-        
-        lToRemovePrev.setNext(lToRemove.getNext());
-        lToRemoveNext.setPrev(lToRemove.getPrev());
-        
+        if(this.mSise > 0){
+            INode<E> lToRemovePrev = lToRemove.getPrev();
+            INode<E> lToRemoveNext = lToRemove.getNext();
+
+            if(lToRemovePrev != null)
+                lToRemovePrev.setNext(lToRemove.getNext());
+            else
+                this.mFirst = lToRemoveNext;
+
+            if(lToRemoveNext != null)
+                lToRemoveNext.setPrev(lToRemove.getPrev());
+            else
+                this.mTail = lToRemovePrev;
+        }
+
         lToRemove.setNext(null);
         lToRemove.setPrev(null);
         
+        this.mSise--;
         return true;
     }
     
@@ -201,28 +209,6 @@ public class List<E> implements IList<E> {
         return this.mTail;
     }
     
-    /** 
-     * Returns an iterator for the list.
-     * @return Iterable instance. 
-     */
-    @Override
-    public IIterable<E> iterator(){
-        return new LinkedListIterator(this.mFirst);
-    }
-    
-    @Override
-    public String toString(){
-        StringBuilder lSB = new StringBuilder();
-        IIterable<E> lIterate = this.iterator();
-        
-        
-        while(lIterate.hasNext()){
-            lSB.append(lIterate.next().toString());
-            lSB.append(", ");
-        }
-        return lSB.toString();
-    }
-    
     public INode<E> iterateBackward(INode<E> pNode)
     {
         return pNode.getPrev();
@@ -231,5 +217,17 @@ public class List<E> implements IList<E> {
     public INode<E> iterateForward(INode<E> pNode)
     {
         return pNode.getNext();
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder lSB = new StringBuilder();
+        
+        for(INode lNode = this.mFirst; lNode != null; lNode = lNode.getNext()){
+            lSB.append(lNode.toString());
+            lSB.append(", ");
+        }
+        
+        return lSB.toString();
     }
 }

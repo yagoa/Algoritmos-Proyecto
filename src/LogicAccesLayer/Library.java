@@ -7,8 +7,6 @@ package LogicAccesLayer;
 
 import DataAccesLayer.*;
 import Entitys.*;
-import Entitys.OneToMany;
-import Utils.Collections.*;
 import Utils.Collections.Lists.*;
 import Utils.Collections.Lists.INode;
 import Utils.SourceType;
@@ -71,9 +69,8 @@ public class Library {
         IList<Book> lAutorBooks = this.Searcher.BooksByAutor(pAutorName);
         IList<Book> lBooksToDelete = new List<Book>();
         
-        for(INode lNode = lAutorBooks.getFirst(); lNode != null; lNode = lNode.getNext()){
-
-            Book lBook = (Book)lNode.getData();
+        for(INode<Book> lNode = lAutorBooks.getFirst(); lNode != null; lNode = lNode.getNext()){
+            Book lBook = lNode.getData();
             
 //            if(lBook.getAutors().size() == 1){
                lBooksToDelete.add(lNode);
@@ -96,23 +93,19 @@ public class Library {
         
         if((books != null && !books.isEmpty()) ||  
            (tags != null && !tags.isEmpty()) ||  
-           (realations != null && !realations.isEmpty()))       
-        {
-             IIterable<OneToMany> iterator = realations.iterator();
-             
-             while(iterator.hasNext())
-             {
-                OneToMany bookTag = iterator.next();
+           (realations != null && !realations.isEmpty())){         
+               
+             for(INode<BookTag> lNode = realations.getFirst(); lNode != null; lNode = lNode.getNext()){   
+                BookTag bookTag = lNode.getData();
                  
                 INode<Book> bookNode = books.search(bookTag.getID());
                 INode<Tag> tagNode = tags.search(bookTag.getOtherID());
                 
-                if(bookNode != null && tagNode!=null)
-                {
+                if(bookNode != null && tagNode!=null){
                     Book book = bookNode.getData();
                     book.addTag(tagNode.getData());
                 }
-             }
+            }
         }
     } 
     
@@ -124,24 +117,20 @@ public class Library {
         
         if((books != null && !books.isEmpty()) ||  
            (autors != null && !autors.isEmpty()) ||  
-           (realations != null && !realations.isEmpty()))       
-        {
-             IIterable<OneToMany> iterator = realations.iterator();
-             while(iterator.hasNext())
-             {       
-                OneToMany bookAutor = iterator.next();
+           (realations != null && !realations.isEmpty())){
+            
+            for(INode<AutorBook> lNode = realations.getFirst(); lNode != null; lNode = lNode.getNext()){   
+                
+                AutorBook bookAutor = lNode.getData();
                  
                 INode<Book>  bookNode = books.search(bookAutor.getID());
                 INode<Autor> autorNode = autors.search(bookAutor.getOtherID());
                 
-                if(bookNode != null && autorNode!=null)
-                {
+                if(bookNode != null && autorNode!=null){
                     Book book = bookNode.getData();
                     book.addAutor(autorNode.getData());
                 }
-             }
+            }
         }
     }
-    
-
 }
