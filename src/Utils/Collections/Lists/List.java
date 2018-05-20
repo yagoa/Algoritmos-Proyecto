@@ -6,7 +6,6 @@ package Utils.Collections.Lists;
 * Simple linked list class representation , implements IList.
 * @see IList
 * @author  Yago Auza
-* @version 1.0
 */
 public class List<E> implements IList<E> {
 
@@ -195,7 +194,6 @@ public class List<E> implements IList<E> {
     
       /**
       * Returns the first node in the list.
-      *
       * @return First node of the list.
       */
     @Override
@@ -203,16 +201,30 @@ public class List<E> implements IList<E> {
         return this.mFirst;
     }   
     
+    /**
+     * Return the last node in the list
+     * @return last node of the list.
+     */
     @Override
     public INode<E> getLast() {
         return this.mTail;
     }
     
+    /**
+     * Itereate the list from the end of a node
+     * @param pNode start node
+     * @return prev node
+     */
     public INode<E> iterateBackward(INode<E> pNode)
     {
         return pNode.getPrev();
     }
     
+    /**
+     * Itereate the list from the front of a node
+     * @param pNode start node
+     * @return next node
+     */
     public INode<E> iterateForward(INode<E> pNode)
     {
         return pNode.getNext();

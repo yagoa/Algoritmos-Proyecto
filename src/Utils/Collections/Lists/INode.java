@@ -30,6 +30,11 @@ public interface INode<E> {
       */
     public INode<E> getNext();
     
+    
+    /**
+     * Assigns the prev node to the current node.
+     * @param pNode Node to assign as previews. 
+     */
     public INode<E> getPrev();
 
     /**
@@ -47,7 +52,6 @@ public interface INode<E> {
 
     /**
      * Returns the node label
-     *
      * @return Node label
      */
     public Comparable getLabel();

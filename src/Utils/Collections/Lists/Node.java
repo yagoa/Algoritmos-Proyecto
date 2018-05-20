@@ -64,6 +64,10 @@ public class Node<T> implements INode<T> {
 
     }
     
+    /**
+     * Assigns the prev node to the current node.
+     * @param pNode Node to assign as previews. 
+     */
     @Override
     public void setPrev(INode<T> pNode) {
         this.mPrev = pNode;

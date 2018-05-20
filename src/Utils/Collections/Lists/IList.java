@@ -44,14 +44,12 @@ public interface IList<E> {
       /**
       * Returns the number of items in the list. If the list
       * empty, return 0.
-      *
       * @return Number of items in the list.
       */
     public int size();
 
      /**
       * Indicates whether or not the list contains elements.
-      *
       * @return If you have any items.
       */
     public boolean isEmpty();
@@ -59,15 +57,28 @@ public interface IList<E> {
     
       /**
       * Returns the first node in the list.
-      *
       * @return First node of the list.
       */
     public INode<E> getFirst();
     
+    /**
+     * Return the last node in the list
+     * @return last node of the list.
+     */
     public INode<E> getLast();
     
+    /**
+     * Itereate the list from the front of a node
+     * @param pNode start node
+     * @return next node
+     */
     public INode<E> iterateForward(INode<E> pNode);
     
+    /**
+     * Itereate the list from the end of a node
+     * @param pNode start node
+     * @return prev node
+     */
     public INode<E> iterateBackward(INode<E> pNode);
 
     @Override
