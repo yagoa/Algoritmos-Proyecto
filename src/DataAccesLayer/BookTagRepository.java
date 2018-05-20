@@ -9,12 +9,20 @@ import Entitys.*;
 import Utils.*;
 
 /**
- *
- * @author yago
+ * This is the repository class to manage all BookTag entity typs
+ * @see BookTag
+ * exentds form Repository object.
+ * @author Yago Auza
  */
 public class BookTagRepository extends Repository<BookTag> {
     
-        public BookTagRepository(SourceType pSourceType){     
+    
+    /**
+     * Class constuctor
+     * @param pSourceType Data source type where the book tags will be obtained
+     * @see SourceType
+     */
+    public BookTagRepository(SourceType pSourceType){     
         switch (pSourceType){
             case CSV:
                 this.CSVDataSource();

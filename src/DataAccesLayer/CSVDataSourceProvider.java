@@ -96,7 +96,7 @@ public class CSVDataSourceProvider<T> implements IDataSourceProvider {
     }
            
     /**
-     * this private method is used to get a buffer reder from to reed the CSV File
+     * this private method is used to get a buffer reder to reed the CSV File
      * @return BufferedReader of CSV file.
      * @throws FileNotFoundException
      * @see FileNotFoundException

@@ -6,27 +6,37 @@
 package Utils;
 
 /**
- *
- * @author yago
+ * Utility class for extension methods
+ * @author yago auza
  */
 public class Extensions {
     
+    /**
+     * Check if a string value is a integer
+     * @param pInput string to check
+     * @return true or false
+     */
     public static boolean isInteger(String pInput ){
        try{
           Integer.parseInt( pInput );
           return true;
        }
-       catch(Exception er){
+       catch(NumberFormatException er){
           return false;
        }
     }
     
+    /**
+     * Check if the string value is a float
+     * @param pInput string to check
+     * @return true or false
+     */
     public static boolean isFloat(String pInput ){
        try{
           Float.parseFloat(pInput);
           return true;
        }
-       catch(Exception er){
+       catch(NumberFormatException er){
           return false;
        }
     }

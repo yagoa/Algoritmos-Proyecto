@@ -6,12 +6,13 @@
 package Utils;
 
 import Entitys.Book;
-import Utils.Collections.Lists.IList;
-import Utils.Collections.Lists.INode;
+import Utils.Collections.Lists.*;
 
 /**
- *
- * @author yago
+ *  Convert a CSV book representation to an object entity representation.
+ *  Implments the IIMapper interface.
+ *  @see IIMapper
+ * @author yago auza
  */
 public class MapperBook implements IMapper {
 

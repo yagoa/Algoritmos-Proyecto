@@ -13,8 +13,8 @@ import Utils.SourceType;
 import java.io.IOException;
 
 /**
- *
- * @author yago
+ * Provide a set of methods and functions to perforrm all bussines operations
+ * @author Yago Auza
  */
 public class Library {
     private final Repository BooksRepo;
@@ -23,10 +23,11 @@ public class Library {
     private final Repository AutorBooksRepo;
     private final Repository BookTagsRepo;
     
-    private StringBuilder messages;
-    
-    private Search Searcher;
-    
+    private final Search Searcher;
+      
+    /**
+     * Base class constructor.
+     */
     public Library(){
         this.TagsRepo = new TagRepository(SourceType.CSV);
         this.AutorsRepo = new AutorRepository(SourceType.CSV);
@@ -37,6 +38,11 @@ public class Library {
         this.Searcher = new Search (this.BooksRepo,this.TagsRepo, this.AutorsRepo,this.AutorBooksRepo, this.BookTagsRepo);
     }
     
+    /**
+     * Method that generates the instances and data that are prerequisites to perform operations
+     * @throws IOException
+     * @see IOException
+     */
     public void Init() throws IOException{
         this.TagsRepo.loadAll();
         this.BooksRepo.loadAll();
@@ -48,39 +54,58 @@ public class Library {
         this.ReleateTagsToBooks();
     }
     
+    /**
+     * Return a Search instance
+     * @see Search
+     * @return Search instance
+     */
     public Search GetSearcher(){
         return this.Searcher;
     }
     
-    public IList<Book> getBooks(){
+    /**
+     * Get a list of with all books and his releted entitys if exist from the source
+     * @return List of books
+     * @throws IOException
+     * @see IOException
+     * @see IList
+     * @see Book
+     */
+    public IList<Book> getBooks() throws IOException{
         return this.BooksRepo.getAll();
     }
     
-    public Boolean RemoveAutor(String pAutorName){
-        if(pAutorName == null || pAutorName == ""){return null;}
+    /**
+     * Remove all books writen for an spesific autor, even if is not the only
+     * autor thats write the book
+     * @param pAutorName Autor name
+     * @return True if books are removed from the source or false
+     * @throws IOException
+     * @see IOException
+     */
+    public Boolean RemoveAutor(String pAutorName) throws IOException{
+        if(pAutorName == null || pAutorName.equals(""))
+            return false;
         
         IList<Book> lSource = BooksRepo.getAll();
-        if (lSource.isEmpty()){ return false;}
+        if (lSource.isEmpty())
+            return false;
         
         IList<Book> lAutorBooks = this.Searcher.BooksByAutor(pAutorName);
-        IList<Book> lBooksToDelete = new List<Book>();
+        IList<Book> lBooksToDelete = new List<>();
         
         for(INode<Book> lNode = lAutorBooks.getFirst(); lNode != null; lNode = lNode.getNext()){
             Book lBook = lNode.getData();
-            
-//            if(lBook.getAutors().size() == 1){
-               lBooksToDelete.add(lNode);
-//            }
+            lBooksToDelete.add(lNode);
         }
         
         for(INode lNode = lBooksToDelete.getFirst(); lNode != null; lNode = lNode.getNext()){
             lSource.delete(lNode.getLabel());
-        }
-        
+        }     
         return true;
     }
-      
-    private void ReleateTagsToBooks(){
+    
+    private void ReleateTagsToBooks() throws IOException{
         IList books = this.BooksRepo.getAll();
         IList tags = this.TagsRepo.getAll();
         IList realations = this.BookTagsRepo.getAll();
@@ -103,7 +128,7 @@ public class Library {
         }
     } 
     
-    private void ReleateAutorsToBooks(){
+    private void ReleateAutorsToBooks() throws IOException{
         IList books = this.BooksRepo.getAll();
         IList autors = this.AutorsRepo.getAll();
         IList realations = this.AutorBooksRepo.getAll();

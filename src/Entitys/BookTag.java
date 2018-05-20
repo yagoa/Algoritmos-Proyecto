@@ -6,14 +6,16 @@
 package Entitys;
 
 /**
- *
- * @author yago
- */
+* Entity class used to store data to relete tags with books.
+* exentds form OneToMany object.
+* @see OneToMany
+* @author  Yago Auza
+*/
 public class BookTag extends OneToMany {
     
-         /**
+     /**
      * Base class constructor.
-     * @param pOtherID Actor identifier number.
+     * @param pId Book unique identiffier.
      */
     public BookTag(int pId){
         super(pId);
@@ -21,8 +23,8 @@ public class BookTag extends OneToMany {
     
     /**
      * Full class constructor.
-     * @param pID Movie identifier number.
-     * @param pOtherID Actor identifier number.
+     * @param pId Book identifier number.
+     * @param pOtherID Tag identifier number.
      */
     public BookTag(int pId, int pOtherID){
         super(pId,pOtherID);

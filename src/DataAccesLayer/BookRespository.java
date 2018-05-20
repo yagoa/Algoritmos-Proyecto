@@ -9,11 +9,18 @@ import Entitys.*;
 import Utils.*;
 
 /**
- *
- * @author yago
+ * This is the repository class to manage all Book entity typs
+ * @see Book
+ * exentds form Repository object.
+ * @author Yago Auza
  */
 public class BookRespository extends Repository<Book> {
  
+    /**
+     * Class constuctor
+     * @param pSourceType Data source type where the books will be obtained
+     * @see SourceType
+     */
     public BookRespository(SourceType pSourceType){    
         switch (pSourceType){
             case CSV:

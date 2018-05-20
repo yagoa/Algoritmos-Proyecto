@@ -13,7 +13,6 @@ import Utils.Collections.Lists.IList;
 *Implements this interface to made conversion form surce entity to an object entity.
 * 
 * @author  Yago Auza
-* @version 1.0
 */
 public interface IMapper {
     

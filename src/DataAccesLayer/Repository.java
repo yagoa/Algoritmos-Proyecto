@@ -12,9 +12,9 @@ import Utils.IMapper;
 import java.io.IOException;
 
 /**
- *
- * @author yago
- * @param <T>
+ * This is a base class with generic and common methods to all repositorys
+ * @author Yago Auza
+ * @param <T> Entity Type.
  */
 public abstract class Repository<T extends UcuBooksBaseEntity> {
 
@@ -22,27 +22,43 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
     protected IDataSourceProvider<T> mDataSource;
     protected IList<T> mEntitys;
     
-    public void loadAll() throws IOException
-    {
+    /**
+     * Read all data form a data source and load it in the class for future use
+     * @throws IOException
+     * @see IOException
+     */
+    public void loadAll() throws IOException{
         this.mEntitys = this.mDataSource.getAll();
     }
     
-    public void loadAllFull() throws IOException
-    {
+    /**
+     * Read all data from data source and load all data and his dependecys in this class for future use
+     * @throws IOException
+     * @see IOException
+     */
+    public void loadAllFull() throws IOException{
        this.mEntitys = this.mDataSource.getAll();
     }
     
     /**
-     *
-     * @return
+     * Get a list of all entitys in the repos or null if they do not exist.
+     * @throws IOException
+     * @see IOException
+     * @return instance of IList with entitys or null
      */
-    public IList<T> getAll()
-    {
+    public IList<T> getAll() throws IOException{
+        if(this.mEntitys == null)
+            this.loadAll();
+            
         return this.mEntitys;
     }
     
-    public Boolean Remove(T item)
-    {
+    /**
+     * Delete a entity form the repository 
+     * @param item Entity to be remove
+     * @return True if entity was removed
+     */
+    public Boolean Remove(T item){
         Boolean result = false;
         if(!this.mEntitys.isEmpty())
         {
@@ -51,6 +67,11 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
         return result;
     }
     
+    /**
+     * Get a entity instance form the repository if exist.
+     * @param pId Entity unique identifier
+     * @return Enitity if exist or null
+     */
     public T GetById (int pId)
     {
         T result = null;
@@ -64,6 +85,7 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
         }
         return result;
     } 
-       
+    
+    
     abstract void CSVDataSource();
 }

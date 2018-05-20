@@ -8,14 +8,11 @@ package Entitys;
 /**
 * Base object class for all entitys.
 * @author  Yago Auza
-* @version 1.0
  */
 
 public class UcuBooksBaseEntity extends Object {
-    //ATRIBUTOS
     private int mId;
     
-    //PROPIEDADES
     
     /**
      * Get the unique identification number.
@@ -33,24 +30,20 @@ public class UcuBooksBaseEntity extends Object {
         this.mId = pId;
     }
     
-    //CONSTRUCTORES
     /**
      * Base class constructor.
      */
     public UcuBooksBaseEntity(){}
     
-    
     /**
      * Full class constructor.
      * @param pId Unique identification number.
      */
-    public UcuBooksBaseEntity(int pId)
-    {
+    public UcuBooksBaseEntity(int pId){
         this.mId = pId;
     }
-
-    public boolean equals(UcuBooksBaseEntity pOther)
-    {
+    
+    public boolean equals(UcuBooksBaseEntity pOther){
         boolean lResult = false;
         
         if (pOther == null)

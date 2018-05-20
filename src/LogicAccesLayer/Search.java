@@ -8,10 +8,11 @@ package LogicAccesLayer;
 import DataAccesLayer.Repository;
 import Entitys.*;
 import Utils.Collections.Lists.*;
+import java.io.IOException;
 
 /**
- *
- * @author yago
+ * Provide a set of methods and functions to perforrm all search releted to books
+ * @author Yago Auza
  */
 public class Search {
     
@@ -21,8 +22,15 @@ public class Search {
     private final Repository AutorBooksRepo;
     private final Repository BookTagsRepo;
     
-    public Search(Repository pBooksRepo,Repository pTagsRepo,Repository pAutorsRepo,Repository pAutorBooksRepo,Repository pBookTagsRepo )
-    {
+    /**
+     * Base class constructor.
+     * @param pBooksRepo book repository instance
+     * @param pTagsRepo tags repository instance
+     * @param pAutorsRepo autors repository instance
+     * @param pAutorBooksRepo autors books repository instance
+     * @param pBookTagsRepo books tags repository instance
+     */
+    public Search(Repository pBooksRepo,Repository pTagsRepo,Repository pAutorsRepo,Repository pAutorBooksRepo,Repository pBookTagsRepo ){
         this.TagsRepo = pTagsRepo;
         this.AutorsRepo = pAutorsRepo;
         this.BooksRepo = pBooksRepo;
@@ -30,32 +38,47 @@ public class Search {
         this.BookTagsRepo = pBookTagsRepo;
     }
     
-    public IList<Book> BooksByYear(short pYear){
+    /**
+     * Get a list of books from a certain year of publication.
+     * @param pYear book year
+     * @return List of books
+     * @see Book
+     * @see IOException
+     * @see IList
+     * @throws IOException
+     */
+    public IList<Book> BooksByYear(short pYear) throws IOException{
+       
+        IList lResult = new List<>();
         IList<Book> lSource = BooksRepo.getAll();
   
-        if (lSource.isEmpty()){ return null;}
-       
-        IList lResult = new List<Book>();
+        if (lSource.isEmpty())
+            return lResult;
         
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){       
             
             Book lCurrent = lNode.getData();
-            if(lCurrent.getYear() >= pYear){
-                
-                System.out.println(lCurrent.toString());
-                
+            if(lCurrent.getYear() >= pYear){          
                 lResult.add(new Node<>(lCurrent,lCurrent.getID()));
             }  
         }   
-        if (lResult.isEmpty()){ return null;}
-       
+            
        return lResult;
     }
     
-    public IList<Book> BooksByAutor(String pAutorName){
-        IList lResult = new List<Book>();
+    /**
+     * Get a list of books from a certain autor.
+     * @param pAutorName autor name
+     * @return List of books writen by the autor
+     * @see Book
+     * @see IOException
+     * @see IList
+     * @throws IOException
+     */
+    public IList<Book> BooksByAutor(String pAutorName) throws IOException{
+        IList lResult = new List<>();
         
-        if(pAutorName == null || pAutorName == "")
+        if(pAutorName == null || pAutorName.equals(""))
             return lResult;     
         
         IList<Book> lSource = BooksRepo.getAll();
@@ -82,10 +105,20 @@ public class Search {
         return lResult;
     }
     
-    public IList<Book> BooksByTag(String pTag){
+    /**
+     * Get a list of books from a by a tag.
+     * @param pTag tag name
+     * @return List of books releted withe the tag
+     * @see Book
+     * @see IOException
+     * @see IList
+     * @see Tag
+     * @throws IOException
+     */
+    public IList<Book> BooksByTag(String pTag) throws IOException{
         
-        IList lResult = new List<Book>();   
-        if(pTag == null || pTag == "")
+        IList lResult = new List<>();   
+        if(pTag == null || pTag.equals(""))
             return lResult;
         
         IList<Book> lSource = BooksRepo.getAll();
@@ -113,10 +146,20 @@ public class Search {
         return lResult;
     }
     
-    public IList<Book> BookByNameAndYear(String pBookName, short pYear){
+    /**
+     * Get a list of books by his name and his year of publication
+     * @param pBookName book name
+     * @param pYear year of publication
+     * @return List of books 
+     * @see Book
+     * @see IOException
+     * @see IList
+     * @throws IOException
+     */
+    public IList<Book> BookByNameAndYear(String pBookName, short pYear) throws IOException{
         
         IList<Book> lSource = this.BooksByYear(pYear);
-        IList lResult = new List<Book>();
+        IList lResult = new List<>();
         if (lSource.isEmpty())
              return lResult;
                 
@@ -132,14 +175,23 @@ public class Search {
                 lResult.add(new Node<>(lCurrent,lCurrent.getID()));
             }  
         }
-
-        if (lResult.isEmpty()){ return null;}    
+ 
         return lResult;
     }
     
-    public IList<Book> BookByAutorAndISBN(String pAutorName, String pISBN){
+    /**
+     * Get a list of books by the autor and a ISBN number
+     * @param pAutorName autor name
+     * @param pISBN ISBN can be ISBN or ISBN13
+     * @return List of books 
+     * @see Book
+     * @see IOException
+     * @see IList
+     * @throws IOException
+     */
+    public IList<Book> BookByAutorAndISBN(String pAutorName, String pISBN) throws IOException{
         
-        IList lResult = new List<Book>();
+        IList lResult = new List<>();
         IList<Book> lSource = this.BooksByAutor(pAutorName);
         if (lSource.isEmpty())
             return lResult;

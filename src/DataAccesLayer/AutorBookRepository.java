@@ -9,11 +9,18 @@ import Entitys.*;
 import Utils.*;
 
 /**
- *
- * @author yago
+ * This is the repository class to manage all AutorBook entity typs
+ * @see AutorBook
+ * exentds form Repository object.
+ * @author Yago Auza
  */
 public class AutorBookRepository extends Repository<AutorBook> {
-    
+      
+    /**
+     * Class constuctor
+     * @param pSourceType Data source type where the autor books will be obtained
+     * @see SourceType
+     */
     public AutorBookRepository(SourceType pSourceType){     
         switch (pSourceType){
             case CSV:

@@ -6,29 +6,31 @@
 package Entitys;
 
 /**
- *
- * @author yago
- */
+* Entity class used to store data of for tags.
+* exentds form UcuBooksBaseEntity object.
+* @see UcuBooksBaseEntity
+* @author  Yago Auza
+*/
 public class Tag extends UcuBooksBaseEntity {
-    //ATRIBUTOS
+    
     private String mTagName;
     
-     //PROPIEDADES
     /**
-     * @return the TagName
+     * Get the current tag name
+     * @return Tag name
      */
     public String getTagName() {
         return mTagName;
     }
 
     /**
-     * @param pTagName the mName to set
+     * Set the current tag name
+     * @param pTagName tag name
      */
     public void setTagName(String pTagName) {
         this.mTagName = pTagName;
     }
     
-    //CONSTRUCTORS   
     /**
      * Base class constructor.
      */

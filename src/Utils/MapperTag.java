@@ -10,8 +10,10 @@ import Utils.Collections.Lists.IList;
 import Utils.Collections.Lists.INode;
 
 /**
- *
- * @author yago
+ *  Convert a CSV tag representation to an object entity representation.
+ *  Implments the IIMapper interface.
+ *  @see IIMapper
+ * @author yago auza
  */
 public class MapperTag implements IMapper {
 

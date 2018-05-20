@@ -6,8 +6,8 @@
 package Utils;
 
 /**
- *
- * @author yago
+ * This enum is used for the supported system data source types
+ * @author yago auza
  */
 public enum SourceType {
     CSV

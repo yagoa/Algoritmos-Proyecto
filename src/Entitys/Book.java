@@ -11,12 +11,13 @@ import Utils.Collections.Lists.List;
 import Utils.Collections.Lists.Node;
 
 /**
- *
- * @author yago
- */
+* Entity class used to store data of books.
+* exentds form UcuBooksBaseEntity object.
+* @see UcuBooksBaseEntity
+* @author  Yago Auza
+*/
 public class Book extends UcuBooksBaseEntity {
 
-    //ATRIBUTOS
     private String mName;
     private short mYear;
     private float mPoints;
@@ -25,95 +26,122 @@ public class Book extends UcuBooksBaseEntity {
     private IList<Autor> mAutors;
     private IList<Tag> mTags;
 
-
-    //PROPIEDADES
     /**
-     * @return the mName
+     * Get the book name
+     * @return book name
      */
     public String getName() {
         return mName;
     }
 
     /**
-     * @param mName the mName to set
+     * Set the book name
+     * @param mName book name
      */
     public void setName(String mName) {
         this.mName = mName;
     }
 
     /**
-     * @return the mYear
+     * Get the book year of publication
+     * @return book year of publication
      */
     public short getYear() {
         return mYear;
     }
 
     /**
-     * @param mYear the mYear to set
+     * Set the book year of publication
+     * @param mYear book year of publication
      */
     public void setYear(short mYear) {
         this.mYear = mYear;
     }
 
     /**
-     * @return the mPoints
+     * Get the book points
+     * @return book points
      */
     public float getPoints() {
         return mPoints;
     }
 
     /**
-     * @param mPoints the mPoints to set
+     * Set the book points
+     * @param mPoints book points
      */
     public void setPoints(float mPoints) {
         this.mPoints = mPoints;
     }
 
     /**
-     * @return the mCantPoints
+     * Get the book quantity of points 
+     * @return book quantity of points 
      */
     public int getCantPoints() {
         return mCantPoints;
     }
 
     /**
-     * @param mCantPoints the mCantPoints to set
+     * Set the book quantity of points 
+     * @param mCantPoints book quantity of points 
      */
     public void setCantPoints(int mCantPoints) {
         this.mCantPoints = mCantPoints;
     }
 
     /**
-     * @return the mISBN
+     * Set the book ISBM
+     * @return book ISBN
      */
     public String getISBN() {
         return mISBN;
     }
 
     /**
-     * @param mISBN the mISBN to set
+     * Get the book ISBN
+     * @param mISBN book ISBN
      */
     public void setISBN(String mISBN) {
         this.mISBN = mISBN;
     }
     
+    /**
+     * Get a list withe the book autors or null
+     * @see Autor
+     * @return List of autors
+     */
     public IList<Autor> getAutors() {
         return mAutors;
     }
     
+    /**
+     * Set a list withe the book autors
+     * @see Autor
+     * @param mAutors book releted autors
+     */
     public void setAutors(IList<Autor> mAutors) {
         this.mAutors = mAutors;
     }
 
+    /**
+     * Get a list withe the book releted tags or null
+     * @see Tag
+     * @return List of tags
+     */
     public IList<Tag> getTags() {
         return mTags;
     }
 
+    /**
+     * Set a list withe the book releted tags
+     * @see Tag
+     * @param mAutors list of releted tags for the book
+     */
     public void setTags(IList<Tag> mTags) {
         this.mTags = mTags;
     }
     
-    //CONSTRUCTORS
     /**
      * Base class constructor.
      */
@@ -123,9 +151,14 @@ public class Book extends UcuBooksBaseEntity {
         super(pId);
     }
     
-    //METODOS
-    public void addAutor(Autor pAutor) throws NullPointerException
-    {
+    /**
+     * Add a new autor to relete him with the book
+     * @param pAutor
+     * @throws NullPointerException
+     * @see Autor
+     * @see NullPointerException
+     */
+    public void addAutor(Autor pAutor) throws NullPointerException{
         if(pAutor != null){
             if(this.getAutors() == null){
                 this.mAutors = new List<Autor>();
@@ -140,8 +173,14 @@ public class Book extends UcuBooksBaseEntity {
             throw new NullPointerException("Producers can't be null."); 
     }
     
-    public void addTag(Tag pTag) throws NullPointerException
-    {
+    /**
+     * Add a new tag to relete him with the book
+     * @param Tag
+     * @throws NullPointerException
+     * @see Tag
+     * @see NullPointerException
+     */
+    public void addTag(Tag pTag) throws NullPointerException{
         if(pTag != null){
             if(this.getTags() == null){
                 this.mTags = new List<Tag>();

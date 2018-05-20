@@ -6,14 +6,16 @@
 package Entitys;
 
 /**
- *
- * @author yago
- */
+* Entity class used to store data to relete autors with books.
+* exentds form OneToMany object.
+* @see OneToMany
+* @author  Yago Auza
+*/
 public class AutorBook extends OneToMany{
     
-     /**
+    /**
      * Base class constructor.
-     * @param pOtherID Actor identifier number.
+     * @param pId Autor identifier number.
      */
     public AutorBook(int pId){
         super(pId);
@@ -21,8 +23,8 @@ public class AutorBook extends OneToMany{
     
     /**
      * Full class constructor.
-     * @param pID Movie identifier number.
-     * @param pOtherID Actor identifier number.
+     * @param pId Autor unique identifier.
+     * @param pOtherID Book unique identifier.
      */
     public AutorBook(int pId, int pOtherID){
         super(pId,pOtherID);

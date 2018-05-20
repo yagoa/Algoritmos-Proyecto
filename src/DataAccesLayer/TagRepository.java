@@ -11,11 +11,18 @@ import Utils.MapperTag;
 import Utils.SourceType;
 
 /**
- *
- * @author yago
+ * This is the repository class to manage all Tag entity typs
+ * @see Tag
+ * exentds form Repository object.
+ * @author Yago Auza
  */
 public class TagRepository extends Repository<Tag> {
 
+    /**
+     * Class constuctor
+     * @param pSourceType Data source type where the tags will be obtained
+     * @see SourceType
+     */
     public TagRepository(SourceType pSourceType){     
         switch (pSourceType){
             case CSV:

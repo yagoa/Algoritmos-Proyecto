@@ -6,35 +6,39 @@
 package Entitys;
 
 /**
- *
- * @author yago
- */
+* Entity class used to store data of a autor.
+* exentds form UcuBooksBaseEntity object.
+* @see UcuBooksBaseEntity
+* @author  Yago Auza
+*/
 public class Autor extends UcuBooksBaseEntity{
-    //ATRIBUTOS
     private String mName;
     
-     //PROPIEDADES
     /**
-     * @return the mName
+     * Get the autor name
+     * @return autor name
      */
     public String getName() {
         return mName;
     }
 
     /**
-     * @param mName the mName to set
+     * set the autor name 
+     * @param mName autor name
      */
     public void setName(String mName) {
         this.mName = mName;
     }
     
-    //CONSTRUCTORS
     
     /**
      * Base class constructor.
      */
     public Autor(){}
-    
+
+    /**
+     * Base class constructor.
+     */
     public Autor(int pId){
         super(pId);
     }

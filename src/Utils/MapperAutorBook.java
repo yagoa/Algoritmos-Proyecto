@@ -6,9 +6,14 @@
 package Utils;
 
 import Entitys.AutorBook;
-import Utils.Collections.Lists.IList;
-import Utils.Collections.Lists.INode;
+import Utils.Collections.Lists.*;
 
+/**
+ *  Convert a CSV autor book representation to an object entity representation.
+ *  Implments the IIMapper interface.
+ *  @see IIMapper
+ * @author yago auza
+ */
 public class MapperAutorBook implements IMapper {
 
     @Override
