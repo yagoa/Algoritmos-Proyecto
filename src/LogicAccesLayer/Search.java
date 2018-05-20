@@ -53,12 +53,15 @@ public class Search {
     }
     
     public IList<Book> BooksByAutor(String pAutorName){
-        if(pAutorName == null || pAutorName == ""){return null;}
+        IList lResult = new List<Book>();
+        
+        if(pAutorName == null || pAutorName == "")
+            return lResult;     
         
         IList<Book> lSource = BooksRepo.getAll();
-        if (lSource.isEmpty()){ return null;}
-       
-        IList lResult = new List<Book>();
+        
+        if (lSource.isEmpty())
+            return lResult;
         
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){ 
             
@@ -80,13 +83,15 @@ public class Search {
     }
     
     public IList<Book> BooksByTag(String pTag){
-        if(pTag == null || pTag == ""){return null;}
+        
+        IList lResult = new List<Book>();   
+        if(pTag == null || pTag == "")
+            return null;
         
         IList<Book> lSource = BooksRepo.getAll();
-        if (lSource.isEmpty()){ return null;}
-       
-        IList lResult = new List<Book>();
-        
+        if (lSource.isEmpty())
+             return null;
+           
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){ 
             
             Book lCurrentBook = lNode.getData();
@@ -109,12 +114,12 @@ public class Search {
     }
     
     public IList<Book> BookByNameAndYear(String pBookName, short pYear){
-        IList<Book> lSource = this.BooksByYear(pYear);
         
-        if (lSource.isEmpty()){ return null;}
-       
+        IList<Book> lSource = this.BooksByYear(pYear);
         IList lResult = new List<Book>();
-            
+        if (lSource.isEmpty())
+             return null;
+                
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){
             
             Book lCurrent = lNode.getData();
@@ -134,11 +139,11 @@ public class Search {
     
     public IList<Book> BookByAutorAndISBN(String pAutorName, String pISBN){
         
-        IList<Book> lSource = this.BooksByAutor(pAutorName);
-        if (lSource.isEmpty()){ return null;}
-       
         IList lResult = new List<Book>();
-        
+        IList<Book> lSource = this.BooksByAutor(pAutorName);
+        if (lSource.isEmpty())
+            return null;
+             
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){
             
             Book lCurrentBook = lNode.getData();

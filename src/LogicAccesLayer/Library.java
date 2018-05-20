@@ -27,8 +27,7 @@ public class Library {
     
     private Search Searcher;
     
-    public Library()
-    {
+    public Library(){
         this.TagsRepo = new TagRepository(SourceType.CSV);
         this.AutorsRepo = new AutorRepository(SourceType.CSV);
         this.BooksRepo = new BookRespository(SourceType.CSV);
@@ -38,8 +37,7 @@ public class Library {
         this.Searcher = new Search (this.BooksRepo,this.TagsRepo, this.AutorsRepo,this.AutorBooksRepo, this.BookTagsRepo);
     }
     
-    public void Init() throws IOException
-    {
+    public void Init() throws IOException{
         this.TagsRepo.loadAll();
         this.BooksRepo.loadAll();
         this.AutorBooksRepo.loadAll();
@@ -50,13 +48,11 @@ public class Library {
         this.ReleateTagsToBooks();
     }
     
-    public Search GetSearcher()
-    {
+    public Search GetSearcher(){
         return this.Searcher;
     }
     
-    public IList<Book> getBooks()
-    {
+    public IList<Book> getBooks(){
         return this.BooksRepo.getAll();
     }
     
@@ -83,10 +79,8 @@ public class Library {
         
         return true;
     }
-    
-    
-    private void ReleateTagsToBooks()
-    {
+      
+    private void ReleateTagsToBooks(){
         IList books = this.BooksRepo.getAll();
         IList tags = this.TagsRepo.getAll();
         IList realations = this.BookTagsRepo.getAll();
@@ -109,8 +103,7 @@ public class Library {
         }
     } 
     
-    private void ReleateAutorsToBooks()
-    {
+    private void ReleateAutorsToBooks(){
         IList books = this.BooksRepo.getAll();
         IList autors = this.AutorsRepo.getAll();
         IList realations = this.AutorBooksRepo.getAll();
