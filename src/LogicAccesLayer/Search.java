@@ -86,11 +86,11 @@ public class Search {
         
         IList lResult = new List<Book>();   
         if(pTag == null || pTag == "")
-            return null;
+            return lResult;
         
         IList<Book> lSource = BooksRepo.getAll();
         if (lSource.isEmpty())
-             return null;
+             return lResult;
            
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){ 
             
@@ -118,7 +118,7 @@ public class Search {
         IList<Book> lSource = this.BooksByYear(pYear);
         IList lResult = new List<Book>();
         if (lSource.isEmpty())
-             return null;
+             return lResult;
                 
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){
             
@@ -142,7 +142,7 @@ public class Search {
         IList lResult = new List<Book>();
         IList<Book> lSource = this.BooksByAutor(pAutorName);
         if (lSource.isEmpty())
-            return null;
+            return lResult;
              
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){
             
