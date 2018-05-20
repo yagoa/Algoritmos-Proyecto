@@ -78,18 +78,17 @@ public class List<E> implements IList<E> {
         while(!searcheEnd){
             lFromTail = this.iterateBackward(lFromTail);
             lFromFirst = this.iterateForward(lFromFirst);
-             
+            
+            if(lFromTail != null && lFromTail.getLabel().equals(key)){
+                return lFromTail;
+            }
+            if(lFromFirst != null && lFromFirst.getLabel().equals(key)){
+                return lFromFirst;
+            }
+            
             if((lFromTail == null && lFromFirst == null) || (lFromTail.getLabel().equals(lFromFirst.getLabel()))){
                 searcheEnd = true;
             }
-            else{
-                if(lFromTail != null && lFromTail.getLabel().equals(key)){
-                    return lFromTail;
-                }
-                if(lFromFirst != null && lFromFirst.getLabel().equals(key)){
-                    return lFromFirst;
-                }
-            }  
         }     
         return null;   
     }
