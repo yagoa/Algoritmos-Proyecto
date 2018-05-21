@@ -30,7 +30,7 @@ public class ConsoleManager {
     public ConsoleManager() throws IOException{
         mMenu = new Menu();
         mLibrary = new Library();    
-        //mLibrary.Init();
+        mLibrary.Init();
     }
     
     /**
