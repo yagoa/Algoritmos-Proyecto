@@ -45,7 +45,7 @@ public class Search {
      * @see Book
      * @see IOException
      * @see IList
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      */
     public IList<Book> BooksByYear(short pYear) throws IOException{
        
@@ -73,7 +73,7 @@ public class Search {
      * @see Book
      * @see IOException
      * @see IList
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      */
     public IList<Book> BooksByAutor(String pAutorName) throws IOException{
         IList<Book> lResult = new List<Book>();
@@ -115,7 +115,7 @@ public class Search {
      * @see IOException
      * @see IList
      * @see Tag
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      */
     public IList<Book> BooksByTag(String pTag) throws IOException{
         
@@ -154,7 +154,7 @@ public class Search {
      * @see Book
      * @see IOException
      * @see IList
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      */
     public IList<Book> BookByNameAndYear(String pBookName, short pYear) throws IOException{
         
@@ -186,7 +186,7 @@ public class Search {
      * @see Book
      * @see IOException
      * @see IList
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      */
     public IList<Book> BookByAutorAndISBN(String pAutorName, String pISBN) throws IOException{
         

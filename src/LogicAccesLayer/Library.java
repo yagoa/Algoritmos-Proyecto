@@ -40,7 +40,7 @@ public class Library {
     
     /**
      * Method that generates the instances and data that are prerequisites to perform operations
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      * @see IOException
      */
     public void Init() throws IOException{
@@ -66,7 +66,7 @@ public class Library {
     /**
      * Get a list of with all books and his releted entitys if exist from the source
      * @return List of books
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      * @see IOException
      * @see IList
      * @see Book
@@ -80,7 +80,7 @@ public class Library {
      * autor thats write the book
      * @param pAutorName Autor name
      * @return True if books are removed from the source or false
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      * @see IOException
      */
     public Boolean RemoveAutor(String pAutorName) throws IOException{

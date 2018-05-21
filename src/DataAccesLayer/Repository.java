@@ -24,7 +24,7 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
     
     /**
      * Read all data form a data source and load it in the class for future use
-     * @throws IOException
+     * @throws IOException I/O Exception
      * @see IOException
      */
     public void loadAll() throws IOException{
@@ -33,7 +33,7 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
     
     /**
      * Read all data from data source and load all data and his dependecys in this class for future use
-     * @throws IOException
+     * @throws IOException I/O Exception
      * @see IOException
      */
     public void loadAllFull() throws IOException{
@@ -42,7 +42,7 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
     
     /**
      * Get a list of all entitys in the repos or null if they do not exist.
-     * @throws IOException
+     * @throws IOException I/O Exception
      * @see IOException
      * @return instance of IList with entitys or null
      */

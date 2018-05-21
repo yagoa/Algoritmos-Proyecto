@@ -136,7 +136,7 @@ public class Book extends UcuBooksBaseEntity {
     /**
      * Set a list withe the book releted tags
      * @see Tag
-     * @param mAutors list of releted tags for the book
+     * @param mTags list of releted tags for the book
      */
     public void setTags(IList<Tag> mTags) {
         this.mTags = mTags;
@@ -153,8 +153,8 @@ public class Book extends UcuBooksBaseEntity {
     
     /**
      * Add a new autor to relete him with the book
-     * @param pAutor
-     * @throws NullPointerException
+     * @param pAutor Autor instance
+     * @throws NullPointerException When try to read a not inicialized instance
      * @see Autor
      * @see NullPointerException
      */
@@ -175,8 +175,8 @@ public class Book extends UcuBooksBaseEntity {
     
     /**
      * Add a new tag to relete him with the book
-     * @param Tag
-     * @throws NullPointerException
+     * @param pTag Tag instance
+     * @throws NullPointerException When try to read a not inicialized instance
      * @see Tag
      * @see NullPointerException
      */

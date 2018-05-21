@@ -11,7 +11,7 @@ import Utils.Collections.Lists.*;
 /**
  *  Convert a CSV autor book representation to an object entity representation.
  *  Implments the IIMapper interface.
- *  @see IIMapper
+ *  @see IMapper Mapper interface
  * @author yago auza
  */
 public class MapperAutorBook implements IMapper {

@@ -25,7 +25,7 @@ public class ConsoleManager {
     
     /**
      * Base class constructor
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      */
     public ConsoleManager() throws IOException{
         mMenu = new Menu();
@@ -35,7 +35,7 @@ public class ConsoleManager {
     
     /**
      * Main entrance point to start the program
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      */
     public void Start() throws IOException{
         int select;

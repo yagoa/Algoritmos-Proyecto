@@ -5,7 +5,7 @@ package Utils.Collections.Lists;
  * Implements INode
  * @see INode
  * @author ucu
- * @param <T> 
+ * @param <T> Generic object type
  */
 public class Node<T> implements INode<T> {
 
@@ -77,7 +77,7 @@ public class Node<T> implements INode<T> {
       * Returns the next node to the current node.
       * @return Next node of the current
      
-     * @return  */
+     * @return Next node from the current */
     @Override
     public INode<T> getNext() {
         return this.mNext;
@@ -113,7 +113,7 @@ public class Node<T> implements INode<T> {
     }
     /**
      * Compare the current label withe other.
-     * @param pLabel 
+     * @param pLabel Key label to compare a node
      * @return returns -1 if it has a lower label in Original, 0 if they are equal, 1 * if greater 
      */
     @Override

@@ -38,6 +38,7 @@ public class Autor extends UcuBooksBaseEntity{
 
     /**
      * Base class constructor.
+     * @param pId Autor unique identifier
      */
     public Autor(int pId){
         super(pId);

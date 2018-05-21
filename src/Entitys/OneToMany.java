@@ -22,7 +22,7 @@ public abstract class OneToMany extends UcuBooksBaseEntity {
 
     /**
      * Set the second entity unique identifier.
-     * @param otherID 
+     * @param otherID other identiffier
      */
     public void setOtherID(int otherID) {
         this.mOtherID = otherID;
