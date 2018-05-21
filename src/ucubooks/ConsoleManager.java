@@ -23,12 +23,20 @@ public class ConsoleManager {
     private final Library mLibrary;
     private BufferedReader mInput;
     
+    /**
+     * Base class constructor
+     * @throws IOException
+     */
     public ConsoleManager() throws IOException{
         mMenu = new Menu();
         mLibrary = new Library();    
         mLibrary.Init();
     }
     
+    /**
+     * Main entrance point to start the program
+     * @throws IOException
+     */
     public void Start() throws IOException{
         int select;
         do {
@@ -70,8 +78,11 @@ public class ConsoleManager {
                       System.out.println("|--------INGRESE UNA OPCION VALIDA--------------|\n");
                 break;
             }
+          System.out.println("-------Precione cualquier tecla para continuar---\n");
+          mInput.readLine();
         } while (select != 8);
     }
+    
     
     private void DeleteAutor() throws IOException{
         System.out.println(mMenu.MenuAutorDelete()); 
