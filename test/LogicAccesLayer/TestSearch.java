@@ -37,7 +37,7 @@ public class TestSearch {
     }
       
     @Test
-    public void testBooksByYear() {
+    public void testBooksByYear() throws IOException {
         short lYear = 2014;
         IList<Book> result = instance.BooksByYear(lYear);
         
@@ -50,7 +50,7 @@ public class TestSearch {
     }
     
     @Test
-    public void testBooksByNotExitentYear() {
+    public void testBooksByNotExitentYear() throws IOException {
         short lYear = 30000;
         IList<Book> result = instance.BooksByYear(lYear);
         
@@ -59,7 +59,7 @@ public class TestSearch {
     }
 
     @Test
-    public void testBooksByAutor() {
+    public void testBooksByAutor() throws IOException {
         Autor lAutor = new Autor(4);
         lAutor.setName("Harper Lee");
         
@@ -76,7 +76,7 @@ public class TestSearch {
     }
     
     @Test
-    public void testBooksByAutorNotFound() {
+    public void testBooksByAutorNotFound() throws IOException {
         Autor lAutor = new Autor(-1);
         lAutor.setName("YagoAuza");
         
@@ -87,7 +87,7 @@ public class TestSearch {
     }
     
     @Test
-    public void testBooksByAutorBadParameters() {
+    public void testBooksByAutorBadParameters() throws IOException {
     
         IList<Book> result = instance.BooksByAutor(null);     
         assertNotNull(result);
@@ -99,7 +99,7 @@ public class TestSearch {
     }
 
     @Test
-    public void testBooksByTag() {
+    public void testBooksByTag() throws IOException {
         Tag lTag = new Tag(25);
         lTag.setTagName("-fiction");
         IList<Book> result = instance.BooksByTag(lTag.getTagName());
@@ -115,7 +115,7 @@ public class TestSearch {
     }
     
     @Test
-    public void testBooksByTagNotFound() {
+    public void testBooksByTagNotFound() throws IOException {
         Tag lTag = new Tag(-1);
         lTag.setTagName("-mytag");
         
@@ -126,7 +126,7 @@ public class TestSearch {
     }
     
     @Test
-    public void testBooksByTagBadParameters() {
+    public void testBooksByTagBadParameters() throws IOException {
     
         IList<Book> result = instance.BooksByTag(null);     
         assertNotNull(result);
@@ -138,7 +138,7 @@ public class TestSearch {
     }
 
     @Test
-    public void testBookByNameAndYear() {
+    public void testBookByNameAndYear() throws IOException {
         String pBookName = "The Hobbit";
         short pYear = 1937;
         IList<Book> result = instance.BookByNameAndYear(pBookName, pYear);
@@ -148,7 +148,7 @@ public class TestSearch {
     }
     
     @Test
-    public void testBookByNameAndYearNotFound() {
+    public void testBookByNameAndYearNotFound() throws IOException {
         String pBookName = "The";
         short pYear = 5000;
         IList<Book> result = instance.BookByNameAndYear(pBookName, pYear);
@@ -158,7 +158,7 @@ public class TestSearch {
     }
     
     @Test
-    public void testBookByNameAndYearBadParameter() {
+    public void testBookByNameAndYearBadParameter() throws IOException {
         String pBookName = "";
         short pYear = 0;
         IList<Book> result = instance.BookByNameAndYear(pBookName, pYear);
@@ -168,7 +168,7 @@ public class TestSearch {
     }
 
     @Test
-    public void testBookByAutorAndISBN() {
+    public void testBookByAutorAndISBN() throws IOException {
         String lAutorName = "Harper Lee";
         String lISBN1 = "618260307";
         String lISBN2 = "9780618260300";
@@ -184,7 +184,7 @@ public class TestSearch {
     }
     
     @Test
-    public void testBookByAutorAndISBNBadISBN() {
+    public void testBookByAutorAndISBNBadISBN() throws IOException {
         String lAutorName = "Harper Lee";
         String lISBN1 = "4444444";
         

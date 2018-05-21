@@ -62,7 +62,7 @@ public class TestLibrary {
     @Test
     public void testGetBooks_WithoutInit() throws IOException {
         IList<Book> result = instance.getBooks();      
-        assertNull(result);
+        assertTrue(result.size() > 0);
     }
 
     @Test

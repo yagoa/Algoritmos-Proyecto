@@ -39,4 +39,10 @@ public class Tag extends UcuBooksBaseEntity {
     public Tag(int pId){
         super(pId);
     }
+    @Override
+    public String toString() {
+        StringBuilder lSB = new StringBuilder(); 
+        lSB.append((this.mTagName  != null && !this.mTagName.equals("")) ? this.mTagName : "Desconocido");
+        return lSB.toString();
+    }
 }

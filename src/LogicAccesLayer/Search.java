@@ -76,7 +76,7 @@ public class Search {
      * @throws IOException
      */
     public IList<Book> BooksByAutor(String pAutorName) throws IOException{
-        IList lResult = new List<>();
+        IList<Book> lResult = new List<Book>();
         
         if(pAutorName == null || pAutorName.equals(""))
             return lResult;     
@@ -89,14 +89,16 @@ public class Search {
         for(INode<Book> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){ 
             
             Book lCurrentBook = lNode.getData();
+            
             if(lCurrentBook.getAutors() != null && lCurrentBook.getAutors().size() > 0) {           
+               
                 IList<Autor> lAutors = lCurrentBook.getAutors();
                 
                 for(INode<Autor> lNodeAutor = lAutors.getFirst(); lNodeAutor != null; lNodeAutor = lNodeAutor.getNext()){               
+                    
                     Autor lCurrentAutor = lNodeAutor.getData();
                    
                     if(lCurrentAutor.getName().toLowerCase().equals(pAutorName.toLowerCase())){         
-                        System.out.println(lCurrentBook.toString());            
                         lResult.add(new Node<>(lCurrentBook,lCurrentBook.getID()));
                     }
                 }
@@ -135,9 +137,7 @@ public class Search {
                 for(INode<Tag> lNodeTag = lBookTags.getFirst(); lNodeTag != null; lNodeTag = lNodeTag.getNext()){ 
                     
                     Tag lCurrentTag = lNodeTag.getData();
-                    if(lCurrentTag.getTagName().toLowerCase().equals(pTag.toLowerCase())){            
-                        System.out.println(lCurrentBook.toString());
-                        
+                    if(lCurrentTag.getTagName().toLowerCase().equals(pTag.toLowerCase())){                        
                         lResult.add(new Node<>(lCurrentBook,lCurrentBook.getID()));
                     }
                 }
@@ -170,8 +170,7 @@ public class Search {
             String lName = lCurrent.getName() == null ? "" : lCurrent.getName().toLowerCase();
             short lYear = lCurrent.getYear();
             
-            if(lYear == pYear && lName.equals(pBookName.toLowerCase())){             
-                System.out.println(lCurrent.toString());             
+            if(lYear == pYear && lName.equals(pBookName.toLowerCase())){                         
                 lResult.add(new Node<>(lCurrent,lCurrent.getID()));
             }  
         }
@@ -191,7 +190,7 @@ public class Search {
      */
     public IList<Book> BookByAutorAndISBN(String pAutorName, String pISBN) throws IOException{
         
-        IList lResult = new List<>();
+        IList<Book> lResult = new List<Book>();
         IList<Book> lSource = this.BooksByAutor(pAutorName);
         if (lSource.isEmpty())
             return lResult;
@@ -204,8 +203,7 @@ public class Search {
             String[] lISBN = lISBNBoth.split("/");
             
             if(lISBN.length != 0 && (lISBN[0].equals(pISBN) || lISBN[1].equals(pISBN))){
-                System.out.println(lCurrentBook.toString());
-                lResult.add(new Node<>(lCurrentBook,lCurrentBook.getID()));      
+                lResult.add(new Node<Book>(lCurrentBook,lCurrentBook.getID()));      
             }
         }     
         return lResult;

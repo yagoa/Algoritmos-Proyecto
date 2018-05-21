@@ -42,4 +42,13 @@ public class Autor extends UcuBooksBaseEntity{
     public Autor(int pId){
         super(pId);
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder lSB = new StringBuilder();
+        
+        lSB.append((this.mName != null && !this.mName.equals("")) ? this.mName : "Desconocido");
+        
+        return lSB.toString();
+    }
 }

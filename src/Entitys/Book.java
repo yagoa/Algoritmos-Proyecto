@@ -197,6 +197,19 @@ public class Book extends UcuBooksBaseEntity {
     
     @Override
     public String toString() {
-        return this.mName+" Year:"+ this.mYear+" ISBN: " + this.mISBN;
+        StringBuilder lSB = new StringBuilder();
+        
+        lSB.append("Id: ").append(this.getID());
+        lSB.append("\n");
+        lSB.append("Titulo: ").append((this.mName != null && !this.mName.equals("")) ? this.mName : "Desconocido");
+        lSB.append("\n");
+        lSB.append("ISBN/ISBN13: ").append((this.mISBN != null && !this.mISBN.equals("")) ? this.mISBN : "Desconocido");
+        lSB.append("\n");
+        lSB.append("Publicacion: ").append(this.mYear != 0 ? this.mYear : "Desconocido");
+        lSB.append("\n"); 
+        lSB.append("Puntaje: ").append(this.mPoints != 0 ? this.mPoints : "Desconocido");
+        lSB.append("\n");
+        lSB.append("Cantidad de puntaje: ").append(this.mCantPoints != 0 ? this.mCantPoints : "Desconocido");
+        return lSB.toString();
     }
 }
