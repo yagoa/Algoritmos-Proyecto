@@ -30,7 +30,7 @@ public class ConsoleManager {
     public ConsoleManager() throws IOException{
         mMenu = new Menu();
         mLibrary = new Library();    
-        mLibrary.Init();
+        //mLibrary.Init();
     }
     
     /**
@@ -72,13 +72,13 @@ public class ConsoleManager {
                     this.DeleteAutor();
                     break;
                 case 8:
-                    System.out.println("|--------------------GRACIAS-----------------|\n");
+                    System.out.println("|---------------------GRACIAS-------------------|");
                     break;
                 default:
-                      System.out.println("|--------INGRESE UNA OPCION VALIDA--------------|\n");
+                      System.out.println("|--------INGRESE UNA OPCION VALIDA--------------|");
                 break;
             }
-          System.out.println("-------Precione cualquier tecla para continuar---\n");
+          System.out.println("-------Precione cualquier tecla para continuar---");
           mInput.readLine();
         } while (select != 8);
     }
