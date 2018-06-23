@@ -7,6 +7,7 @@ package LogicAccesLayer;
 
 import DataAccesLayer.*;
 import Entitys.*;
+import Utils.Collections.BinaryTree.ITreeNode;
 import Utils.Collections.Lists.*;
 import Utils.Collections.Lists.INode;
 import Utils.SourceType;
@@ -20,8 +21,8 @@ public class Library {
     private final Repository BooksRepo;
     private final Repository TagsRepo;
     private final Repository AutorsRepo;
-    private final Repository AutorBooksRepo;
-    private final Repository BookTagsRepo;
+    private final AutorBookRepository AutorBooksRepo;
+    private final BookTagRepository BookTagsRepo;
     
     private final Search Searcher;
       
@@ -106,7 +107,7 @@ public class Library {
     }
     
     private void ReleateTagsToBooks() throws IOException{
-        IList books = this.BooksRepo.getAll();
+        /*IList books = this.BooksRepo.getAll();
         IList tags = this.TagsRepo.getAll();
         IList realations = this.BookTagsRepo.getAll();
         
@@ -125,11 +126,45 @@ public class Library {
                     book.addTag(tagNode.getData());
                 }
             }
+        }*/
+        
+        this.BookTagsRepo.LoadBinaryTree();
+        IList books = this.BooksRepo.getAll();
+        IList tags = this.TagsRepo.getAll();
+        
+        if((books != null && !books.isEmpty()) ||  
+           (tags != null && !tags.isEmpty()) ||  
+            (BookTagsRepo.binaryTree != null && !BookTagsRepo.binaryTree.isEmpty())){
+            
+            for(INode<Tag> lNode = tags.getFirst(); lNode != null; lNode = lNode.getNext()){   
+                
+                Tag Tag = lNode.getData();
+                ITreeNode<IList<Integer>> tagkNodeWithBooks = BookTagsRepo.binaryTree.search(Tag.getID());
+                
+                if(tagkNodeWithBooks != null){
+                
+                   IList<Integer> booksIds = tagkNodeWithBooks.getData();
+                   
+                   if(booksIds != null && !booksIds.isEmpty()){
+                       
+                        for(INode<Integer> lBookIdsNode = booksIds.getFirst(); lBookIdsNode != null; lBookIdsNode = lBookIdsNode.getNext()){  
+                            Integer bookId = lBookIdsNode.getData();
+                            
+                            INode<Book> bookNode = books.search(bookId);
+                            
+                            if(bookNode!=null){
+                                bookNode.getData().addTag(Tag);
+                            }
+                        }
+                    }
+                }
+            }
         }
+        
     } 
     
     private void ReleateAutorsToBooks() throws IOException{
-        IList books = this.BooksRepo.getAll();
+        /*IList books = this.BooksRepo.getAll();
         IList autors = this.AutorsRepo.getAll();
         IList realations = this.AutorBooksRepo.getAll();
         
@@ -149,6 +184,39 @@ public class Library {
                     book.addAutor(autorNode.getData());
                 }
             }
-        }
+        }*/
+        
+        this.AutorBooksRepo.LoadBinaryTree();
+        IList autors = this.AutorsRepo.getAll();
+        IList books = this.BooksRepo.getAll();
+        
+        if((books != null && !books.isEmpty()) ||  
+           (autors != null && !autors.isEmpty()) ||  
+            (AutorBooksRepo.binaryTree != null && !AutorBooksRepo.binaryTree.isEmpty())){
+            
+            for(INode<Book> lNode = books.getFirst(); lNode != null; lNode = lNode.getNext()){   
+                
+                Book book = lNode.getData();
+                ITreeNode<IList<Integer>> bookNodeWithAutors = AutorBooksRepo.binaryTree.search(book.getID());
+                
+                if(bookNodeWithAutors != null){
+                
+                   IList<Integer> autorsIds = bookNodeWithAutors.getData();
+                   
+                   if(autorsIds != null && !autorsIds.isEmpty()){
+                       
+                        for(INode<Integer> lAutorIdNode = autorsIds.getFirst(); lAutorIdNode != null; lAutorIdNode = lAutorIdNode.getNext()){  
+                            Integer autorId = lAutorIdNode.getData();
+                            
+                            INode<Autor> autorNode = autors.search(autorId);
+                            
+                            if(autorNode!=null){
+                                book.addAutor(autorNode.getData());
+                            }
+                        }
+                    }
+                }
+            }
+        }  
     }
 }
