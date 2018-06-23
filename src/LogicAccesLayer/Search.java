@@ -19,23 +19,17 @@ public class Search {
     private final Repository BooksRepo;
     private final Repository TagsRepo;
     private final Repository AutorsRepo;
-    private final Repository AutorBooksRepo;
-    private final Repository BookTagsRepo;
     
     /**
      * Base class constructor.
      * @param pBooksRepo book repository instance
      * @param pTagsRepo tags repository instance
      * @param pAutorsRepo autors repository instance
-     * @param pAutorBooksRepo autors books repository instance
-     * @param pBookTagsRepo books tags repository instance
      */
-    public Search(Repository pBooksRepo,Repository pTagsRepo,Repository pAutorsRepo,Repository pAutorBooksRepo,Repository pBookTagsRepo ){
+    public Search(Repository pBooksRepo,Repository pTagsRepo,Repository pAutorsRepo){
         this.TagsRepo = pTagsRepo;
         this.AutorsRepo = pAutorsRepo;
         this.BooksRepo = pBooksRepo;
-        this.AutorBooksRepo = pAutorBooksRepo;
-        this.BookTagsRepo = pBookTagsRepo;
     }
     
     /**

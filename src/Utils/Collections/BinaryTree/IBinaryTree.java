@@ -1,5 +1,8 @@
 package Utils.Collections.BinaryTree;
 
+import Utils.Collections.Lists.IList;
+import java.util.LinkedList;
+
 
 public interface IBinaryTree<T> {
 
@@ -28,21 +31,21 @@ public interface IBinaryTree<T> {
      *
      * @return String conteniendo el preorden separado por guiones.
      */
-    public String preOrden();
+    public IList<T> preOrden();
 
     /**
      * Imprime en InOrden los elementos del �rbol, separados por guiones.
      *
      * @return String conteniendo el preorden separado por guiones.
      */
-    public String inOrden();
+    public IList<T> inOrden();
 
     /**
      * Imprime en PostOrden los elementos del �rbol, separados por guiones.
      *
      * @return String conteniendo el preorden separado por guiones.
      */
-    public String postOrden();
+    public IList<T> postOrden();
 
    
        /**
@@ -54,6 +57,8 @@ public interface IBinaryTree<T> {
    
     
     public boolean clear();
+    
+     public boolean isEmpty();
 	
 }
 

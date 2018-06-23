@@ -1,5 +1,9 @@
 package Utils.Collections.BinaryTree;
 
+import Utils.Collections.Lists.IList;
+import Utils.Collections.Lists.Node;
+import java.util.LinkedList;
+
 /**
  * @author Programacion2
  * @param <T>
@@ -17,7 +21,7 @@ public class TreeNode<T> implements ITreeNode<T> {
      * @param data
      */
     @SuppressWarnings("unchecked")
-    public TreeNode(Comparable tag, T data) {
+    public TreeNode(T data,Comparable tag) {
         mTag = tag;
         mData = data;
     }
@@ -76,11 +80,11 @@ public class TreeNode<T> implements ITreeNode<T> {
     @Override
     public ITreeNode search(Comparable tag) {
 
-        if (tag.equals(tag))
+        if (tag.equals(mTag))
         {
             return this;
         }
-        else if (tag.compareTo(tag) < 0)
+        else if (tag.compareTo(mTag) < 0)
         {
             if (mLeftSon != null) 
             {
@@ -104,69 +108,42 @@ public class TreeNode<T> implements ITreeNode<T> {
     /**
      * @return recorrida en inorden del subArbol que cuelga del elemento actual
      */
+
     @Override
-    public String inOrden() 
-    {
-        StringBuilder tempStr = new StringBuilder();
-        if (mLeftSon != null) 
-        {
-            tempStr.append(getLeftSon().inOrden());
-            tempStr.append("-");
-        }
-        
-        tempStr.append(imprimir());
-        
-        if (mRigthSon != null) 
-        {
-            tempStr.append("-");
-            tempStr.append(getRigthSon().inOrden());
-        }
+    public void inOrden(IList<T> unaLista) {
+        if (mLeftSon != null) {
+            mLeftSon.inOrden(unaLista);
 
-        return tempStr.toString();
+        }
+        unaLista.add(new Node(this.getData(), this.getTag()));
+        if (mRigthSon!= null) {
+            mRigthSon.inOrden(unaLista);
+        }
     }
 
-    /**
-     * @return recorrida en preOrden del subArbol que cuelga del elemento actual
-     */
-    public String preOrden() 
-    {
-        StringBuilder tempStr = new StringBuilder();
-        tempStr.append(imprimir());
-        
-        if (mLeftSon != null) 
-        {
-            tempStr.append("-");
-            tempStr.append(getLeftSon().preOrden());
+    @Override
+    public void preOrden(IList<T> unaLista) {
+        unaLista.add(new Node(this.getData(), this.getTag()));
+        if (mLeftSon != null) {
+            mLeftSon.preOrden(unaLista);
         }
-        
-        if (mRigthSon != null) 
-        {
-            tempStr.append("-");
-            tempStr.append(getRigthSon().preOrden());
+
+        if (mRigthSon != null) {
+            mRigthSon.inOrden(unaLista);
         }
-        return tempStr.toString();
     }
 
-    /**
-     * @return recorrida en postOrden del subArbol que cuelga del elemento
-     * actual
-     */
-    public String postOrden() 
-    {
-        StringBuilder tempStr = new StringBuilder();
-        if (mLeftSon != null)
-        {
-            tempStr.append(getLeftSon().postOrden());
-            tempStr.append("-");
+    @Override
+    public void postOrden(IList<T> unaLista) {
+
+        if (mLeftSon != null) {
+            mLeftSon.preOrden(unaLista);
         }
-        if (mRigthSon != null)
-        {
-            tempStr.append(getRigthSon().postOrden());
-            tempStr.append("-");
+
+        if (mRigthSon != null) {
+            mRigthSon.inOrden(unaLista);
         }
-        
-        tempStr.append(imprimir());
-        return tempStr.toString();
+        unaLista.add(new Node(this.getData(), this.getTag()));
     }
 
     @Override

@@ -1,5 +1,8 @@
 package Utils.Collections.BinaryTree;
 
+import Utils.Collections.Lists.IList;
+import java.util.LinkedList;
+
 
 
 public interface ITreeNode<T> {
@@ -62,23 +65,25 @@ public interface ITreeNode<T> {
     /**
      * Imprime en preorden el arbol separado por guiones.
      *
+     * @param unaLista
      * @return String conteniendo el PreOrden
      */
-    public String preOrden();
+    public void preOrden(IList<T> unaLista);
 
     /**
      * Imprime en inorden el arbol separado por guiones.
      *
      * @return String conteniendo el InOrden
      */
-    public String inOrden();
+    public void inOrden(IList<T> unaLista);
 
     /**
      * Imprime en postorden el arbol separado por guiones.
      *
+     * @param unaLista
      * @return String conteniendo el PostOrden
      */
-    public String postOrden();
+    public void postOrden(IList<T> unaLista);
 
     /**
      * Retorna los datos contenidos en el elemento.

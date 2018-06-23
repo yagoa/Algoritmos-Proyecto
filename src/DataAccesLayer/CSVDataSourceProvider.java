@@ -12,6 +12,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import Utils.*;
+import Utils.Collections.BinaryTree.BinaryTree;
+import Utils.Collections.BinaryTree.IBinaryTree;
+import Utils.Collections.BinaryTree.TreeNode;
 import Utils.Collections.Lists.IList;
 import Utils.Collections.Lists.List;
 import Utils.Collections.Lists.Node;
@@ -94,6 +97,54 @@ public class CSVDataSourceProvider<T> implements IDataSourceProvider {
         }
         return lObjectList;
     }
+    
+    /**
+    * This method is used to get all data form the data source.
+    * mapped to the correct entity.
+    * @return A generic IBinaryTree of mapped objects from the datasurce.
+    * @throws IOException On input error.
+    * @see IOException
+    * @throws FileNotFoundException when the datasource not exist.
+    * @see FileNotFoundException
+     */
+    @Override
+    public IBinaryTree getAllBinary() throws IOException, FileNotFoundException {
+        IBinaryTree<T> lObjectTree = null;
+        String lCurrentLine;
+        
+        if(this.mSeparator == null || this.mSeparator.equals(""))
+            throw new NullPointerException("Separator can't be null or empty.");
+        
+        BufferedReader lBuferReder = this.readCSVFile();
+        try
+        {
+            if(lBuferReder != null){
+                lObjectTree = new BinaryTree<>();
+
+                while ((lCurrentLine = lBuferReder.readLine()) != null){
+
+                    int lPropertyPosition = 1;
+                    IList<String> lPropertysString = new List<>();
+
+                    for(String lProperty : lCurrentLine.split("\\"+this.mSeparator)){
+
+                        lPropertysString.add(new Node<>(lProperty, lPropertyPosition));           
+                        lPropertyPosition++;
+                    }
+
+                    Object lEntity  = this.mMapTo.SourceToEntity(lPropertysString);
+                    if(lEntity!= null){
+                        Comparable lKey = Integer.parseInt(lPropertysString.getFirst().getData().replaceAll("\"", ""));
+                        lObjectTree.add(new TreeNode(lEntity,lKey));
+                    }
+                }
+            }
+        }
+        catch(IOException | NumberFormatException  ex){
+            throw ex;
+        }
+        return lObjectTree;
+    }
            
     /**
      * this private method is used to get a buffer reder to reed the CSV File
@@ -112,4 +163,6 @@ public class CSVDataSourceProvider<T> implements IDataSourceProvider {
         else
             throw new NullPointerException("File Path can't be null or empty.");
     }
+
+
 }

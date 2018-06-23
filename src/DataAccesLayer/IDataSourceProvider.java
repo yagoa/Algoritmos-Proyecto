@@ -5,6 +5,7 @@
  */
 package DataAccesLayer;
 
+import Utils.Collections.BinaryTree.IBinaryTree;
 import Utils.Collections.Lists.IList;
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -28,4 +29,15 @@ public interface IDataSourceProvider <T> {
    * @see FileNotFoundException
    */
     public IList<T> getAll() throws IOException, FileNotFoundException;
+    
+    /**
+    * This method is used to get all data form the data source.
+    * mapped to the correct entity.
+    * @return A generic IBinaryTree of mapped objects from the datasurce.
+    * @throws IOException On input error.
+    * @see IOException
+    * @throws FileNotFoundException when the datasource not exist.
+    * @see FileNotFoundException
+     */
+    public IBinaryTree<T> getAllBinary() throws IOException, FileNotFoundException;
 }

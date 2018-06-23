@@ -35,7 +35,7 @@ public class Library {
         this.AutorBooksRepo = new AutorBookRepository(SourceType.CSV);
         this.BookTagsRepo = new BookTagRepository(SourceType.CSV);
         
-        this.Searcher = new Search (this.BooksRepo,this.TagsRepo, this.AutorsRepo,this.AutorBooksRepo, this.BookTagsRepo);
+        this.Searcher = new Search (this.BooksRepo,this.TagsRepo, this.AutorsRepo);
     }
     
     /**

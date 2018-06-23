@@ -6,6 +6,7 @@
 package DataAccesLayer;
 
 import Entitys.UcuBooksBaseEntity;
+import Utils.Collections.BinaryTree.IBinaryTree;
 import Utils.Collections.Lists.IList;
 import Utils.Collections.Lists.INode;
 import Utils.IMapper;
@@ -72,8 +73,7 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
      * @param pId Entity unique identifier
      * @return Enitity if exist or null
      */
-    public T GetById (int pId)
-    {
+    public T GetById (int pId){
         T result = null;
         if(!this.mEntitys.isEmpty())
         {
@@ -85,7 +85,6 @@ public abstract class Repository<T extends UcuBooksBaseEntity> {
         }
         return result;
     } 
-    
-    
+        
     abstract void CSVDataSource();
 }

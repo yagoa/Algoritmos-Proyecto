@@ -1,5 +1,9 @@
 package Utils.Collections.BinaryTree;
 
+import Utils.Collections.Lists.IList;
+import Utils.Collections.Lists.List;
+import java.util.LinkedList;
+
 /**
  * @author Programacion2
  * @param <T>
@@ -57,48 +61,42 @@ public class BinaryTree<T> implements IBinaryTree<T> {
      * @return recorrida en inorden del arbol, null en caso de ser vacío
      */
     @Override
-    public String inOrden() 
+    public IList<T> inOrden() 
     {
-        if (isEmpty()) 
-        {
-            return null;
-        } 
-        else 
-        {
-            return root.inOrden();
+        IList<T> listaInorden = null;
+        if (!isEmpty()) {
+            listaInorden = new List<>();
+            root.inOrden(listaInorden);
         }
+        return listaInorden;
     }
 
     /**
      * @return recorrida en preOrden del arbol, null en caso de ser vacío
      */
     @Override
-    public String preOrden() 
+    public IList<T> preOrden() 
     {
-        if (isEmpty()) 
-        {
-            return null;
-        } 
-        else 
-        {
-            return root.preOrden();
+        IList<T> listaPreOrden = null;
+        if (!isEmpty()) {
+            listaPreOrden = new List<>();
+            root.preOrden(listaPreOrden);
         }
+        return listaPreOrden;
     }
 
     /**
      * @return recorrida en postOrden del arbol, null en caso de ser vacío
      */
     @Override
-    public String postOrden()
+    public IList<T> postOrden()
     {
-        if (isEmpty()) 
-        {
-            return null;
-        } 
-        else 
-        {
-            return root.postOrden();
+        IList<T> listaPostOrden = null;
+        if (!isEmpty()) {
+            listaPostOrden = new List<T>();
+            root.postOrden(listaPostOrden);
         }
+        return listaPostOrden;
     }
 
     @Override
@@ -124,7 +122,7 @@ public class BinaryTree<T> implements IBinaryTree<T> {
         return false;
     }
     
-    private boolean isEmpty()
+    public boolean isEmpty()
     {
         return (root == null);
     }

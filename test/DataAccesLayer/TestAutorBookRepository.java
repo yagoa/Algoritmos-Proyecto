@@ -6,6 +6,7 @@
 package DataAccesLayer;
 
 import Entitys.AutorBook;
+import Utils.Collections.BinaryTree.IBinaryTree;
 import Utils.Collections.Lists.IList;
 import Utils.SourceType;
 import java.io.IOException;
@@ -72,5 +73,15 @@ public class TestAutorBookRepository {
     public void testCSVDataSourceNullRepositoryInstance() {
         BookTagRepository instance = null;
         instance.CSVDataSource();
+    }  
+    
+    
+        
+    @Test()
+    public void testLoadBinaryTree() throws IOException {
+        mRepository.LoadBinaryTree();
+        
+        assertNotNull(mRepository.binaryTree);
+        
     }  
 }
