@@ -159,7 +159,7 @@ public class Search {
             Tag lCurrentTag = lNodeTag.getData();
             if(lCurrentTag.getTagName().toLowerCase().equals(pTag.toLowerCase())){
                 
-                ITreeNode<IList<Integer>> tagNodeWithBooks = BookTagsRepo.binaryTree.search(lCurrentTag.getID());
+                ITreeNode<IList<Integer>> tagNodeWithBooks = BookTagsRepo.binaryTree_TagWitheBooks.search(lCurrentTag.getID());
                 
                 if(tagNodeWithBooks != null){
                     
@@ -244,7 +244,16 @@ public class Search {
         return lResult;
     }   
     
-    
+    /**
+     * Get a list of books with all tags pass as parameter
+     * @param tags List of tags names to search
+     * @return List of books releted withe the tags
+     * @see Book
+     * @see IOException
+     * @see IList
+     * @see Tag
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
+     */
     public IList<Book> BooksByTags(IList<String> tags) throws IOException{
         
         IList<Book> booksResult = new List();

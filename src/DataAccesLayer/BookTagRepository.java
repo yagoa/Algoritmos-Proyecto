@@ -25,22 +25,27 @@ import java.io.IOException;
  */
 public class BookTagRepository extends Repository<BookTag> {
     
-    public IBinaryTree<IList<Integer>> binaryTree;
+    public IBinaryTree<IList<Integer>> binaryTree_TagWitheBooks;
     
+    /**
+     * Load the public atribute binary tree tag with books, a node has tagId as key and a list of booksId as value
+     * @throws IOException On input error.
+     * @see IOException
+     */
     public void LoadBinaryTree() throws IOException{
         if(this.mEntitys == null)
             this.loadAll();
            
-        if(binaryTree == null || binaryTree.isEmpty()){
+        if(binaryTree_TagWitheBooks == null || binaryTree_TagWitheBooks.isEmpty()){
        
-            binaryTree = new BinaryTree<IList<Integer>>();
+            binaryTree_TagWitheBooks = new BinaryTree();
             
             for(INode<BookTag> lNode = mEntitys.getFirst(); lNode != null; lNode = lNode.getNext()){   
                 
                 BookTag bookTag = lNode.getData();
                 
                 // buscar en el arbol el id del tag
-                ITreeNode<IList<Integer>> bookNode = binaryTree.search(bookTag.getOtherID());
+                ITreeNode<IList<Integer>> bookNode = binaryTree_TagWitheBooks.search(bookTag.getOtherID());
                 
                 // si no esta agregar al arbol binario como tag el id del tag con una lista de ids libros
                 if(bookNode == null){          
@@ -49,7 +54,7 @@ public class BookTagRepository extends Repository<BookTag> {
                     
                     booksIdsList.add(new Node(bookTag.getID(), bookTag.getID()));
                     
-                    binaryTree.add(new TreeNode(booksIdsList,bookTag.getOtherID()));
+                    binaryTree_TagWitheBooks.add(new TreeNode(booksIdsList,bookTag.getOtherID()));
                 }
                 // si esta, agregar al arbol binario. tomar la lista de ids de libros del nodo y agregarle un tag mas
                 else{                

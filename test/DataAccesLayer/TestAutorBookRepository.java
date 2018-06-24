@@ -81,7 +81,7 @@ public class TestAutorBookRepository {
     public void testLoadBinaryTree() throws IOException {
         mRepository.LoadBinaryTree();
         
-        assertNotNull(mRepository.binaryTree);
+        assertNotNull(mRepository.binaryTree_BookWitheAutors);
         
     }  
 }

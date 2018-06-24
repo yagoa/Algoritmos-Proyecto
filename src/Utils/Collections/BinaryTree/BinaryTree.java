@@ -2,7 +2,6 @@ package Utils.Collections.BinaryTree;
 
 import Utils.Collections.Lists.IList;
 import Utils.Collections.Lists.List;
-import java.util.LinkedList;
 
 /**
  * @author Programacion2
@@ -14,10 +13,6 @@ public class BinaryTree<T> implements IBinaryTree<T> {
     private ITreeNode<T> root;
     private int altura;
 
-    /**
-     * Separador utilizado entre elemento y elemento al imprimir la lista
-     */
-    public static final String SEPARADOR_ELEMENTOS_IMPRESOS = "-";
 
     public BinaryTree() {
         root = null;

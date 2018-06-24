@@ -25,22 +25,27 @@ import java.io.IOException;
  */
 public class AutorBookRepository extends Repository<AutorBook> {
 
-    public IBinaryTree<IList<Integer>> binaryTree;
+    public IBinaryTree<IList<Integer>> binaryTree_BookWitheAutors;
     
+    /**
+     * Load the public atribute binary tree book with autors, a node has book id as key and a list of autors id as value
+     * @throws IOException On input error.
+     * @see IOException
+     */
     public void LoadBinaryTree() throws IOException{
         if(this.mEntitys == null)
             this.loadAll();
            
-        if(binaryTree == null || binaryTree.isEmpty()){
+        if(binaryTree_BookWitheAutors == null || binaryTree_BookWitheAutors.isEmpty()){
        
-            binaryTree = new BinaryTree<IList<Integer>>();
+            binaryTree_BookWitheAutors = new BinaryTree<IList<Integer>>();
             
             for(INode<AutorBook> lNode = mEntitys.getFirst(); lNode != null; lNode = lNode.getNext()){   
                 
                 AutorBook autorBook = lNode.getData();
                 
                 // buscar en el arbol el id del libro
-                ITreeNode<IList<Integer>> bookNode = binaryTree.search(autorBook.getID());
+                ITreeNode<IList<Integer>> bookNode = binaryTree_BookWitheAutors.search(autorBook.getID());
                 
                 // si no esta agregar al arbol binario como tag el id libro con una lista de ids autores
                 if(bookNode == null){          
@@ -49,7 +54,7 @@ public class AutorBookRepository extends Repository<AutorBook> {
                     
                     autorsIdsList.add(new Node(autorBook.getOtherID(), autorBook.getOtherID()));
                     
-                    binaryTree.add(new TreeNode(autorsIdsList,autorBook.getID()));
+                    binaryTree_BookWitheAutors.add(new TreeNode(autorsIdsList,autorBook.getID()));
                 }
                 // si esta agregar al arbol binario, tomar la lista de ids de autores del nodo y agregarle un autor mas
                 else{                

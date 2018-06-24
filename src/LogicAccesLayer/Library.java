@@ -7,8 +7,6 @@ package LogicAccesLayer;
 
 import DataAccesLayer.*;
 import Entitys.*;
-import Utils.Collections.BinaryTree.BinaryTree;
-import Utils.Collections.BinaryTree.IBinaryTree;
 import Utils.Collections.BinaryTree.ITreeNode;
 import Utils.Collections.BinaryTree.TreeNode;
 import Utils.Collections.Lists.*;
@@ -123,6 +121,7 @@ public class Library {
      * @param pTag String tag name
      * @return True if tag was removed from the source or false
      * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
+     * @see IOException
      */
     public Boolean RemoveTag(String pTag) throws IOException{
         if(pTag == null || pTag.equals(""))
@@ -149,7 +148,7 @@ public class Library {
                 book.getTags().delete(lTagToDelete.getID());
             } 
             
-            BookTagsRepo.binaryTree.delete(lTagToDelete.getID());
+            BookTagsRepo.binaryTree_TagWitheBooks.delete(lTagToDelete.getID());
         }
               
         return true;
@@ -163,7 +162,7 @@ public class Library {
             for(INode<Tag> lNode = tags.getFirst(); lNode != null; lNode = lNode.getNext()){   
                 
                 Tag Tag = lNode.getData();
-                ITreeNode<IList<Integer>> tagkNodeWithBooks = BookTagsRepo.binaryTree.search(Tag.getID());
+                ITreeNode<IList<Integer>> tagkNodeWithBooks = BookTagsRepo.binaryTree_TagWitheBooks.search(Tag.getID());
                 
                 if(tagkNodeWithBooks != null){
                     // Borro el libro del nodo
@@ -171,7 +170,7 @@ public class Library {
                     
                     // Si el nodo se queda sin libros, borro el nodo
                     if(tagkNodeWithBooks.getData().isEmpty()) {
-                        BookTagsRepo.binaryTree.delete(tagkNodeWithBooks.getTag());
+                        BookTagsRepo.binaryTree_TagWitheBooks.delete(tagkNodeWithBooks.getTag());
                     }
                 }
             }         
@@ -205,12 +204,12 @@ public class Library {
         
         if((books != null && !books.isEmpty()) ||  
            (tags != null && !tags.isEmpty()) ||  
-            (BookTagsRepo.binaryTree != null && !BookTagsRepo.binaryTree.isEmpty())){
+            (BookTagsRepo.binaryTree_TagWitheBooks != null && !BookTagsRepo.binaryTree_TagWitheBooks.isEmpty())){
             
             for(INode<Tag> lNode = tags.getFirst(); lNode != null; lNode = lNode.getNext()){   
                 
                 Tag Tag = lNode.getData();
-                ITreeNode<IList<Integer>> tagkNodeWithBooks = BookTagsRepo.binaryTree.search(Tag.getID());
+                ITreeNode<IList<Integer>> tagkNodeWithBooks = BookTagsRepo.binaryTree_TagWitheBooks.search(Tag.getID());
                         
                 
                 if(tagkNodeWithBooks != null){
@@ -249,7 +248,7 @@ public class Library {
         
         
         if(!booksWitoutTagsIdsList.isEmpty()){
-            BookTagsRepo.binaryTree.add(new TreeNode(booksWitoutTagsIdsList, -1));
+            BookTagsRepo.binaryTree_TagWitheBooks.add(new TreeNode(booksWitoutTagsIdsList, -1));
         }
     }
  
@@ -280,12 +279,12 @@ public class Library {
         
         if((books != null && !books.isEmpty()) ||  
            (autors != null && !autors.isEmpty()) ||  
-            (AutorBooksRepo.binaryTree != null && !AutorBooksRepo.binaryTree.isEmpty())){
+            (AutorBooksRepo.binaryTree_BookWitheAutors != null && !AutorBooksRepo.binaryTree_BookWitheAutors.isEmpty())){
             
             for(INode<Book> lNode = books.getFirst(); lNode != null; lNode = lNode.getNext()){   
                 
                 Book book = lNode.getData();
-                ITreeNode<IList<Integer>> bookNodeWithAutors = AutorBooksRepo.binaryTree.search(book.getID());
+                ITreeNode<IList<Integer>> bookNodeWithAutors = AutorBooksRepo.binaryTree_BookWitheAutors.search(book.getID());
                 
                 if(bookNodeWithAutors != null){
                 
