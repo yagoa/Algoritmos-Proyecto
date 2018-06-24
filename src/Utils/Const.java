@@ -23,5 +23,6 @@ public class Const {
     public class CSV
     {
         public static final String Separator = "|";
+        public static final String ComaSeparator = ",";
     }
 }

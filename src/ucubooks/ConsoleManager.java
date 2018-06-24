@@ -8,6 +8,7 @@ package ucubooks;
 import Entitys.*;
 import LogicAccesLayer.Library;
 import Utils.Collections.Lists.*;
+import Utils.Const;
 import Utils.Extensions;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -72,6 +73,12 @@ public class ConsoleManager {
                     this.DeleteAutor();
                     break;
                 case 8:
+                    this.FindBooksByTags();
+                    break;
+                case 9:
+                    this.DeleteTag();
+                    break;
+                case 10:
                     System.out.println("|---------------------GRACIAS-------------------|");
                     break;
                 default:
@@ -272,5 +279,55 @@ public class ConsoleManager {
             System.out.println(ex.getMessage());
         }
         
+    }
+    
+    private void FindBooksByTags() throws IOException{
+        System.out.println(mMenu.MenuTagsName()); 
+        String lUserInput =  mInput.readLine();
+         
+        try {
+            
+            IList<String> tagsList = new List();
+            String[] tags = lUserInput.split(Const.CSV.ComaSeparator);
+            
+            for(String tag : tags){
+            
+                tagsList.add(new Node(tag,tag));
+            }
+                    
+            IList<Book> books = mLibrary.GetSearcher().BooksByTags(tagsList);
+            if(books != null && books.size() > 0){
+
+                for(INode<Book> lNode = books.getFirst(); lNode != null; lNode = lNode.getNext()){       
+
+                    Book lCurrent = lNode.getData();
+                    System.out.println(lCurrent.toString());
+                    System.out.println("-------------------------------------------------");
+                } 
+            }
+        } 
+        catch (IOException ex) {
+            mMenu.MenuExeption();
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    private void DeleteTag() throws IOException{
+        System.out.println(mMenu.MenuTagDelete()); 
+        String lUserInput =  mInput.readLine();
+         
+        try {
+            boolean lResult = mLibrary.RemoveTag(lUserInput);
+            if(lResult){
+                System.out.println("---------------TAG ELIMINADO-----------------");
+            }
+            else{
+                System.out.println("-------------TAG NO ELIMINADO----------------");
+            }
+        } 
+        catch (IOException ex) {
+            mMenu.MenuExeption();
+            System.out.println(ex.getMessage());
+        }
     }
 }

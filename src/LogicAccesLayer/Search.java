@@ -5,8 +5,10 @@
  */
 package LogicAccesLayer;
 
+import DataAccesLayer.BookTagRepository;
 import DataAccesLayer.Repository;
 import Entitys.*;
+import Utils.Collections.BinaryTree.ITreeNode;
 import Utils.Collections.Lists.*;
 import java.io.IOException;
 
@@ -19,17 +21,20 @@ public class Search {
     private final Repository BooksRepo;
     private final Repository TagsRepo;
     private final Repository AutorsRepo;
+    private final BookTagRepository BookTagsRepo;
     
     /**
      * Base class constructor.
      * @param pBooksRepo book repository instance
      * @param pTagsRepo tags repository instance
      * @param pAutorsRepo autors repository instance
+     * @param pBookTags bookTags repository instance
      */
-    public Search(Repository pBooksRepo,Repository pTagsRepo,Repository pAutorsRepo){
+    public Search(Repository pBooksRepo,Repository pTagsRepo,Repository pAutorsRepo, BookTagRepository pBookTags){
         this.TagsRepo = pTagsRepo;
         this.AutorsRepo = pAutorsRepo;
         this.BooksRepo = pBooksRepo;
+        this.BookTagsRepo = pBookTags;
     }
     
     /**
@@ -112,8 +117,8 @@ public class Search {
      * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
      */
     public IList<Book> BooksByTag(String pTag) throws IOException{
-        
-        IList lResult = new List<>();   
+        /*
+        IList<Book> lResult = new List();   
         if(pTag == null || pTag.equals(""))
             return lResult;
         
@@ -136,9 +141,45 @@ public class Search {
                     }
                 }
             }     
-        }    
+        }*/
+        
+        
+        IList<Book> lResult = new List();   
+        if(pTag == null || pTag.equals(""))
+            return lResult;
+        
+        IList<Book> lSource = BooksRepo.getAll();
+        if (lSource.isEmpty())
+             return lResult;
+        
+        IList<Tag> lTagSource = TagsRepo.getAll();
+        
+        for(INode<Tag> lNodeTag = lTagSource.getFirst(); lNodeTag != null; lNodeTag = lNodeTag.getNext()){ 
+
+            Tag lCurrentTag = lNodeTag.getData();
+            if(lCurrentTag.getTagName().toLowerCase().equals(pTag.toLowerCase())){
+                
+                ITreeNode<IList<Integer>> tagNodeWithBooks = BookTagsRepo.binaryTree.search(lCurrentTag.getID());
+                
+                if(tagNodeWithBooks != null){
+                    
+                    IList<Integer> booksIds = tagNodeWithBooks.getData();
+                   
+                    for(INode<Integer> lBookIdsNode = booksIds.getFirst(); lBookIdsNode != null; lBookIdsNode = lBookIdsNode.getNext()){  
+                        
+                        Integer bookId = lBookIdsNode.getData();
+                        INode<Book> bookNode = lSource.search(bookId);
+
+                        if(bookNode!=null){
+                           lResult.add(new Node<>(bookNode.getData(),bookNode.getData().getID()));
+                        }
+                    }
+                }           
+            }
+        }
         return lResult;
     }
+   
     
     /**
      * Get a list of books by his name and his year of publication
@@ -202,4 +243,22 @@ public class Search {
         }     
         return lResult;
     }   
+    
+    
+    public IList<Book> BooksByTags(IList<String> tags) throws IOException{
+        
+        IList<Book> booksResult = new List();
+        
+         for(INode<String> lNode = tags.getFirst(); lNode != null; lNode = lNode.getNext()){
+             
+             String tag = lNode.getData();
+             
+             IList<Book> books = this.BooksByTag(tag);
+             
+              for(INode<Book> lBookNode = books.getFirst(); lBookNode != null; lBookNode = lBookNode.getNext()){
+                  booksResult.add(lBookNode);
+              }       
+         }      
+         return booksResult;
+    }
 }

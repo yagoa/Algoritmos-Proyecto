@@ -7,7 +7,10 @@ package LogicAccesLayer;
 
 import DataAccesLayer.*;
 import Entitys.*;
+import Utils.Collections.BinaryTree.BinaryTree;
+import Utils.Collections.BinaryTree.IBinaryTree;
 import Utils.Collections.BinaryTree.ITreeNode;
+import Utils.Collections.BinaryTree.TreeNode;
 import Utils.Collections.Lists.*;
 import Utils.Collections.Lists.INode;
 import Utils.SourceType;
@@ -23,7 +26,7 @@ public class Library {
     private final Repository AutorsRepo;
     private final AutorBookRepository AutorBooksRepo;
     private final BookTagRepository BookTagsRepo;
-    
+
     private final Search Searcher;
       
     /**
@@ -35,8 +38,8 @@ public class Library {
         this.BooksRepo = new BookRespository(SourceType.CSV);
         this.AutorBooksRepo = new AutorBookRepository(SourceType.CSV);
         this.BookTagsRepo = new BookTagRepository(SourceType.CSV);
-        
-        this.Searcher = new Search (this.BooksRepo,this.TagsRepo, this.AutorsRepo);
+            
+        this.Searcher = new Search (this.BooksRepo,this.TagsRepo, this.AutorsRepo, this.BookTagsRepo);
     }
     
     /**
@@ -51,8 +54,13 @@ public class Library {
         this.BookTagsRepo.loadAll();
         this.AutorsRepo.loadAll();
         
+        this.BookTagsRepo.LoadBinaryTree();
+        this.AutorBooksRepo.LoadBinaryTree();
+        
         this.ReleateAutorsToBooks();
         this.ReleateTagsToBooks();
+        
+        this.ReleteBooksWitoutTags();
     }
     
     /**
@@ -100,10 +108,74 @@ public class Library {
             lBooksToDelete.add(lNode);
         }
         
-        for(INode lNode = lBooksToDelete.getFirst(); lNode != null; lNode = lNode.getNext()){
-            lSource.delete(lNode.getLabel());
+        for(INode<Book> lNode = lBooksToDelete.getFirst(); lNode != null; lNode = lNode.getNext()){
+            
+            Book bookToDelete = lNode.getData();
+            //Si se borra un libro, se debe obtener los tags
+            this.RemoveBookFromBookTags(bookToDelete);
+            lSource.delete(bookToDelete.getID());         
         }     
         return true;
+    }
+    
+    /**
+     * Remve a tag from the system
+     * @param pTag String tag name
+     * @return True if tag was removed from the source or false
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operation
+     */
+    public Boolean RemoveTag(String pTag) throws IOException{
+        if(pTag == null || pTag.equals(""))
+            return false;
+        
+        IList<Tag> lSource = TagsRepo.getAll();
+        if (lSource.isEmpty())
+            return false;
+        
+        Tag lTagToDelete = null;    
+        for(INode<Tag> lNode = lSource.getFirst(); lNode != null; lNode = lNode.getNext()){
+           if(lNode.getData().getTagName().equals(pTag)){
+               lTagToDelete = lNode.getData();
+               break;
+           }
+        }   
+      
+        if(lTagToDelete != null){
+            IList<Book> lTagBooks = this.Searcher.BooksByTag(lTagToDelete.getTagName());
+             
+            for(INode<Book> lNode = lTagBooks.getFirst(); lNode != null; lNode = lNode.getNext()){   
+                Book book = lNode.getData();
+                
+                book.getTags().delete(lTagToDelete.getID());
+            } 
+            
+            BookTagsRepo.binaryTree.delete(lTagToDelete.getID());
+        }
+              
+        return true;
+    }
+    
+    private void RemoveBookFromBookTags(Book book){
+        IList tags = book.getTags();
+        
+        if(tags != null && !tags.isEmpty()){
+            
+            for(INode<Tag> lNode = tags.getFirst(); lNode != null; lNode = lNode.getNext()){   
+                
+                Tag Tag = lNode.getData();
+                ITreeNode<IList<Integer>> tagkNodeWithBooks = BookTagsRepo.binaryTree.search(Tag.getID());
+                
+                if(tagkNodeWithBooks != null){
+                    // Borro el libro del nodo
+                    tagkNodeWithBooks.getData().delete(book.getID());
+                    
+                    // Si el nodo se queda sin libros, borro el nodo
+                    if(tagkNodeWithBooks.getData().isEmpty()) {
+                        BookTagsRepo.binaryTree.delete(tagkNodeWithBooks.getTag());
+                    }
+                }
+            }         
+        }
     }
     
     private void ReleateTagsToBooks() throws IOException{
@@ -127,8 +199,7 @@ public class Library {
                 }
             }
         }*/
-        
-        this.BookTagsRepo.LoadBinaryTree();
+            
         IList books = this.BooksRepo.getAll();
         IList tags = this.TagsRepo.getAll();
         
@@ -140,6 +211,7 @@ public class Library {
                 
                 Tag Tag = lNode.getData();
                 ITreeNode<IList<Integer>> tagkNodeWithBooks = BookTagsRepo.binaryTree.search(Tag.getID());
+                        
                 
                 if(tagkNodeWithBooks != null){
                 
@@ -160,9 +232,27 @@ public class Library {
                 }
             }
         }
-        
     } 
-    
+      
+    private void ReleteBooksWitoutTags() throws IOException{
+        
+        IList books = this.BooksRepo.getAll();  
+        IList<Integer> booksWitoutTagsIdsList = new List<>();
+        
+        for(INode<Book> lNode = books.getFirst(); lNode != null; lNode = lNode.getNext()){           
+            Book book = lNode.getData();
+            
+            if(book.getTags() == null || book.getTags().isEmpty()){
+                booksWitoutTagsIdsList.add(new Node(book.getID(), book.getID()));
+            }
+        }
+        
+        
+        if(!booksWitoutTagsIdsList.isEmpty()){
+            BookTagsRepo.binaryTree.add(new TreeNode(booksWitoutTagsIdsList, -1));
+        }
+    }
+ 
     private void ReleateAutorsToBooks() throws IOException{
         /*IList books = this.BooksRepo.getAll();
         IList autors = this.AutorsRepo.getAll();
@@ -185,8 +275,6 @@ public class Library {
                 }
             }
         }*/
-        
-        this.AutorBooksRepo.LoadBinaryTree();
         IList autors = this.AutorsRepo.getAll();
         IList books = this.BooksRepo.getAll();
         
@@ -219,4 +307,5 @@ public class Library {
             }
         }  
     }
+    
 }

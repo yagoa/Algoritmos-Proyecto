@@ -21,14 +21,16 @@ public class Menu {
         lSB.append("|   SELECIONE UNA DE LAS SIGUIENTES OPCIONES    |\n");
         lSB.append("|-----------------------------------------------|\n");
         lSB.append("|   Opciones:                                   |\n");
-        lSB.append("|        [1]. Mostrar ultimas ediciones.        |\n");
-        lSB.append("|        [2]. Mostrar informacion detallada.    |\n");
-        lSB.append("|        [3]. Buscar por nombre y año.          |\n");
-        lSB.append("|        [4]. Buscar por autor y ISBN.          |\n");
-        lSB.append("|        [5]. Buscar por autor                  |\n");
-        lSB.append("|        [6]. Buscar por tag                    |\n");
-        lSB.append("|        [7]. Eliminar autor                    |\n");
-        lSB.append("|        [8]. Salir                             |\n");
+        lSB.append("|        [1].  Mostrar ultimas ediciones.        |\n");
+        lSB.append("|        [2].  Mostrar informacion detallada.    |\n");
+        lSB.append("|        [3].  Buscar por nombre y año.          |\n");
+        lSB.append("|        [4].  Buscar por autor y ISBN.          |\n");
+        lSB.append("|        [5].  Buscar por autor                  |\n");
+        lSB.append("|        [6].  Buscar por tag                    |\n");
+        lSB.append("|        [7].  Eliminar autor                    |\n");
+        lSB.append("|        [8].  Buscar por tags                   |\n");
+        lSB.append("|        [9].  Borrar tag de libros              |\n");
+        lSB.append("|        [10]. Salir                             |\n");
         return lSB.toString();
     }
     
@@ -38,7 +40,7 @@ public class Menu {
      */
     public String MenuBookById(){
          StringBuilder lSB = new StringBuilder();
-         lSB.append("|      POR FAVOR INGRESE EL ID DEL LIBRO       |\n");
+         lSB.append("|      POR FAVOR INGRESE EL ID DEL LIBRO        |\n");
          return lSB.toString();
     }
     
@@ -48,7 +50,7 @@ public class Menu {
      */
     public String MenuBookYear(){
          StringBuilder lSB = new StringBuilder();
-         lSB.append("|          POR FAVOR INGRESE UN AÑO:            |\n");
+         lSB.append("|          POR FAVOR INGRESE UN AÑO:             |\n");
          return lSB.toString();
     }
     
@@ -58,7 +60,7 @@ public class Menu {
      */
     public String MenuBookIsbn(){
          StringBuilder lSB = new StringBuilder();
-         lSB.append("|       POR FAVOR INGRESE EL ISBN O ISBN 13     |\n");
+         lSB.append("|       POR FAVOR INGRESE EL ISBN O ISBN 13      |\n");
          return lSB.toString();
     }
     
@@ -68,7 +70,7 @@ public class Menu {
      */
     public String MenuBadParameter(){
          StringBuilder lSB = new StringBuilder();
-         lSB.append("|      POR FAVOR INGRESE UN VALOR CORRECTO      |\n");
+         lSB.append("|      POR FAVOR INGRESE UN VALOR CORRECTO       |\n");
          return lSB.toString();
     }
     
@@ -78,7 +80,7 @@ public class Menu {
      */
     public String MenuExeption(){
          StringBuilder lSB = new StringBuilder();
-         lSB.append("|              OCURRIO UNA EXEPCION              |\n");
+         lSB.append("|              OCURRIO UNA EXEPCION               |\n");
          return lSB.toString();
     }
     
@@ -88,7 +90,7 @@ public class Menu {
      */
     public String MenuBookName(){
          StringBuilder lSB = new StringBuilder();
-         lSB.append("|   POR FAVOR INGRESE EL NOMBRE DEL LIBRO:    |\n");
+         lSB.append("|   POR FAVOR INGRESE EL NOMBRE DEL LIBRO:     |\n");
          return lSB.toString();
     }
    
@@ -98,7 +100,7 @@ public class Menu {
      */
     public String MenuAutorName(){
          StringBuilder lSB = new StringBuilder();
-         lSB.append("|   POR FAVOR INGRESE EL NOMBRE DEL AUTOR     |\n");
+         lSB.append("|   POR FAVOR INGRESE EL NOMBRE DEL AUTOR      |\n");
          return lSB.toString();
     }
     
@@ -108,7 +110,18 @@ public class Menu {
      */
     public String MenuTagName(){
          StringBuilder lSB = new StringBuilder();
-         lSB.append("|   POR FAVOR INGRESE EL NOMBRE DEL TAG       |\n");
+         lSB.append("|   POR FAVOR INGRESE EL NOMBRE DEL TAG        |\n");
+         return lSB.toString();
+    }
+    
+    /**
+     * Menu option used to notify the user to insert tags name
+     * @return String menu result
+     */
+    public String MenuTagsName(){
+         StringBuilder lSB = new StringBuilder();
+         lSB.append("|   POR FAVOR INGRESE EL NOMBRE DE LOS TAGS    |\n");
+         lSB.append("|   SEPARADOS POR COMA EJ(1,2,3)               |\n");
          return lSB.toString();
     }
     
@@ -119,6 +132,16 @@ public class Menu {
     public String MenuAutorDelete(){
          StringBuilder lSB = new StringBuilder();
          lSB.append("|ADVETENCIA: SE ELIMINARAN TODOS LOS LIBROS RELACIONADOS AL AUTOR|\n");
+         return lSB.toString();
+    }
+    
+    /**
+     * Menu option used to notify the user to insert a tag name to delete
+     * @return String menu result
+     */
+    public String MenuTagDelete(){
+         StringBuilder lSB = new StringBuilder();
+         lSB.append("|ADVETENCIA: SE ELIMINARAN EL TAG                                |\n");
          return lSB.toString();
     }
 }
