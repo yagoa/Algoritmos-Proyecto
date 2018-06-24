@@ -1,101 +1,85 @@
 package Utils.Collections.BinaryTree;
 
 import Utils.Collections.Lists.IList;
-import java.util.LinkedList;
 
-
-
+/**
+ * Tree node interface to use ina binary tree
+ * @author yago
+ */
 public interface ITreeNode<T> {
 
     /**
-     * Obtiene el valor de la etiqueta del nodo.
-     *
-     * @return Etiqueta del nodo.
+     * Get the value of the node tag.
+     * @return Node Tag.
      */
     public Comparable getTag();
 
     /**
-     * Obtiene el hijo izquierdo del nodo.
-     *
-     * @return Hijo Izquierdo del nodo.
+     * Get the left child of the node.
+     * @return Left Son node.
      */
     public ITreeNode getLeftSon();
 
     /**
-     * Obtiene el hijo derecho del nodo.
-     *
-     * @return Hijo derecho del nodo.
+     * Get the right child of the node.
+     * @return Right Son of the node.
      */
     public ITreeNode getRigthSon();
 
     /**
-     * Asigna el hijo izquierdo del nodo.
-     *
-     * @param node
-     * @return Elemento a ser asignado como hijo izquierdo.
+     * Assigns the left son of the node.
+     * @param node Element to be assigned as a left son.
      */
     public void setLeftSon(ITreeNode node);
 
     /**
-     * Asigna el hijo derecho del nodo.
-     *
-     * @param node
-     * @return Elemento a ser asignado como hijo derecho.
+     * Assigns the right son of the node.
+     * @param node Element to be assigned as the right child.
      */
     public void setRigthSon(ITreeNode node);
 
     /**
-     * Busca un elemento dentro del arbol con la etiqueta indicada.
-     *
-     * @param tag del nodo a search
-     * @return Elemento encontrado. En caso de no encontrarlo, retorna nulo.
+     * Find an item in the tree with the indicated tag.
+     * @param tag from the node to search
+     * @return Element found. If you can not find it, it returns null.
      */
     public ITreeNode search(Comparable tag);
 
- 
-
     /**
-     * Inserta un node dentro del arbol.
-     *
-     * @param node Elemento a add.
-     * @return Exito de la operaci�n.
+     * Insert a node inside the tree.
+     * @param node Element to add.
+     * @return Success of the operation.
      */
     public boolean add(ITreeNode node);
 
     /**
-     * Imprime en preorden el arbol separado por guiones.
-     *
-     * @param unaLista
-     * @return String conteniendo el PreOrden
+     * Get a list of elements in the tree in preorden
+     * @param unaLista a list of elements
      */
     public void preOrden(IList<T> unaLista);
 
     /**
-     * Imprime en inorden el arbol separado por guiones.
-     *
-     * @return String conteniendo el InOrden
+     * Get a list of elements in the tree in inorden
+     * @param unaLista a list of elements
      */
     public void inOrden(IList<T> unaLista);
 
     /**
-     * Imprime en postorden el arbol separado por guiones.
-     *
-     * @param unaLista
-     * @return String conteniendo el PostOrden
+     * Get a list of elements in the tree in postorden
+     * @param unaLista a list of elements
      */
     public void postOrden(IList<T> unaLista);
 
     /**
-     * Retorna los datos contenidos en el elemento.
-     *
-     * @return
+     * Returns the data contained in the element.
+     * @return Data
      */
     public T getData();
     
     /**
-     * Elimina un elemento dada una etiqueta.
-     * @param tag
-     * @return 
+     * Remove an item given a tag.
+     * @param tag from the node to delete
+     * @return deleted node
      */
     public ITreeNode delete(Comparable tag);
 	

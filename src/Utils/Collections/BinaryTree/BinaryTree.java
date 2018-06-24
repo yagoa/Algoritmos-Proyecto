@@ -4,23 +4,26 @@ import Utils.Collections.Lists.IList;
 import Utils.Collections.Lists.List;
 
 /**
- * @author Programacion2
- * @param <T>
- *
- */
+* Search binary tree class representation , implements IBinaryTree.
+* @see IBinaryTree
+* @author  Yago Auza
+*/
 public class BinaryTree<T> implements IBinaryTree<T> {
 
     private ITreeNode<T> root;
     private int altura;
 
-
+    /**
+     * Full class contructor
+     */
     public BinaryTree() {
         root = null;
     }
 
     /**
-     * @param node
-     * @return
+     * add an element in the tree. In case there is already an element with the key indicated in "node", returns false.
+     * @param node Element to insert
+     * @return Success of the operation
      */
     @Override
     public boolean add(ITreeNode<T> node) {
@@ -36,8 +39,9 @@ public class BinaryTree<T> implements IBinaryTree<T> {
     }
 
     /**
-     * @param tag
-     * @return
+     * Look for an element within the tree.
+     * @param tag Identification tag of the item to search.
+     * @return Element found. If you can not find it, it returns null.
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -53,7 +57,9 @@ public class BinaryTree<T> implements IBinaryTree<T> {
     }
 
     /**
-     * @return recorrida en inorden del arbol, null en caso de ser vacío
+     * Get a list of elements in the tree in inorden
+     * @see IList
+     * @return List of elements in inOrden
      */
     @Override
     public IList<T> inOrden() 
@@ -67,7 +73,9 @@ public class BinaryTree<T> implements IBinaryTree<T> {
     }
 
     /**
-     * @return recorrida en preOrden del arbol, null en caso de ser vacío
+     * Get a list of elements in the tree in preorden
+     * @see IList
+     * @return List of elements in preorden
      */
     @Override
     public IList<T> preOrden() 
@@ -81,7 +89,9 @@ public class BinaryTree<T> implements IBinaryTree<T> {
     }
 
     /**
-     * @return recorrida en postOrden del arbol, null en caso de ser vacío
+     * Get a list of elements in the tree in postorden
+     * @see IList
+     * @return List of elements in postorden
      */
     @Override
     public IList<T> postOrden()
@@ -93,7 +103,11 @@ public class BinaryTree<T> implements IBinaryTree<T> {
         }
         return listaPostOrden;
     }
-
+    
+    /**
+     * Delete an item given a tag.
+     * @param tag tag key
+     */
     @Override
     public void delete(Comparable tag) {
         if (!isEmpty()) 
@@ -102,11 +116,11 @@ public class BinaryTree<T> implements IBinaryTree<T> {
         }
     }
 
-    /**
-     * @return
-     */
 
-    
+    /**
+     * Clear binary tree
+     * @return True if succes or false if not
+     */
     @Override
     public boolean clear() {
         if (!isEmpty()) 
@@ -117,6 +131,11 @@ public class BinaryTree<T> implements IBinaryTree<T> {
         return false;
     }
     
+    /**
+     * Indicates whether or not the binary tree contains elements.
+     * @return If you have any items return false.
+     */
+    @Override
     public boolean isEmpty()
     {
         return (root == null);
